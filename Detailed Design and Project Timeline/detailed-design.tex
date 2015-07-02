@@ -5,6 +5,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{titling}
+\usepackage[toc,page]{appendix}
 \usepackage{setspace}
 \usepackage{tikz}
 \usepackage{graphicx} % Include graphic importing
@@ -53,6 +54,7 @@
 \newglossaryentry{rpi}{type=technical, name=Raspberry Pi 2 Model B, text=Raspberry Pi, description=The Raspberry Pi 2 Model B is the second generation Raspberry Pi. It replaced the original Raspberry Pi 1 Model B+ in February 2015.}
 
 %\newacronym{abv}{ABV}{Alcohol By Volume}
+\newacronym{aisi}{AISI}{American Iron and Steel Institute}
 \newacronym{arm}{ARM}{Acorn \gls{risc} Machine}
 \newacronym{cfia}{CFIA}{Canadian Food Inspection Agency (CFIA)}
 \newacronym{gcm}{GCM}{Google Cloud Messaging}
@@ -65,6 +67,7 @@
 \newacronym{ram}{RAM}{Random Access Memory}
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
+\newacronym{uts}{UTS}{Ultimate Tensile Strength}
 \newacronym{xmpp}{XMPP}{Extensible Messaging and Presence Protocol}
 
 \author{\\\\}
@@ -280,11 +283,65 @@ The mechanical design component of this project is comprised of two aspects: the
 
 \subsubsection{Material}
 To meet the requirements of food grade equipment, the components of the fermenter that will come into contact with the brewing ingredients are to be constructed from stainless steel.  While the \gls{cfia} does not outline specific details for the materials to be used in food processing, it states that, ``Food contact surfaces of equipment and utensils are smooth, non-corrosive, non-absorbent, non-toxic, free from pitting, cracks or crevices, and able to withstand repeated cleaning and sanitation" \cite{food-grade}.
+To meet the non-corrosive guideline set by the \gls{cfia}, \gls{aisi} 304 stainless steel was the specific alloy of stainless steel chosen for the construction of the food-contacting surfaces of the fermenter.  304 is a member of the authenticate family of stainless steels, which have the best general corrosion resistance of any family of stainless steel.  They also contain low levels of carbon, aiding in weld-ability.  The low levels of carbon also act to reduce the generation of inter-granular corrosion caused by welding, over the life of the component \cite{asme-eng}.  Tables of the composition of 304 and pertinent mechanical properties are included in \ref{app:304}. The outer tank of the fermenter will not come into contact with the brewing ingredients, and as such, other materials separate from stainless steel may be used.  Aluminium was chosen to be the material for the outer tank due to its low mass and financial cost.
 
 \subsubsection{Tank Structure}
+When contemplating the mechanical design for a double-walled system such as this fermenter, the wall thickness for the inner tank should be determined early as this will dictate the structural support required between the inner and outer tanks, as well as the frame to support the entire vessel. Forced carbonation of different brews can reach up to 30psi.  The American Society of Mechanical Engineers (ASME) outlines a function for determining the wall thickness of a pressure vessel as
+
+\begin{equation}
+t = \frac{P_{work} \times r \times FS}{\sigma_{uts} \times E}
+\end{equation}
+\noindent{Where:} \\
+P is the working pressure of the vessel\\
+r is the radius of the vessel\\
+FS is the factor of safety\\
+$­\sigma_{uts}$ is the ultimate tensile strength of the material\\
+E is the non-dimensional efficiency of a welded seam\\\\
+
+\noindent{Therefore:}
+\begin{equation}
+t = \frac{206.84kpa \times 254mm \times 9}{505MPa \times 0.6}
+\end{equation}
+\begin{equation}
+t = 1.560mm
+\end{equation}
+
+The recommended thickness derived from this equation is approximately 1/16 of an inch, or 16 gauge when used to describe sheets of stainless steel.
+The outer tank thickness can now be specified using the mass of the inner tank and the brewing ingredients.  The design of the system features collars at the top and bottom of both tanks to distribute the load evenly around the perimeter of the outer tank.  The deflection and shear formulas used to determine the forces acting on the tank collars were first introduced in ME 220, Mechanics of Deformable Solids, and ME 322 Machine Design.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.20]{fermenter-cad.png}
+\caption{Illustration of the double wall design for the fermenter}
+\label{fig:fermenter-wall-cad}
+\end{center}
+\end{figure}
+
+Formula \ref{eq:stress} was found using the Mechanical Engineer’s Handbook \cite{mech-handbook}.
+The maximum stress experienced by the collar of the outer tank occurs at the inner edge of the collar.  The \gls{uts} of aluminium can be used as this stress to determine the minimum sheet thickness required to support the fermenter.
+
+\begin{equation}
+\sigma = \frac{3w}{mt^{2}(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma^{2}b^{2} - 4(m + 1)a^{2}b^{2}\ln(\frac{a}{b}) \Big)
+\label{eq:stress}
+\end{equation}
+
+\noindent{Where:} \\
+t is the sheet thickness\\
+m is the reciprocal of Poisson’s Ratio\\
+a is the outer diameter of the collar\\
+b is the inner diameter of the collar\\
+w is the applied force on the collar\\\\
+
+\noindent{Therefore:}
+\begin{equation}
+t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma^{2}b^{2} - 4(m + 1)a^{2}b^{2}\ln(\frac{a}{b}) \Big)
+\end{equation}
+The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125 in. was selected to meet the requirements for the outer tank.
 
 \subsection{Electrical System}
+The electrical system consists of 2 main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
 \subsubsection{Heating and Cooling Controller}
+
 \subsubsection{Motor Controller}
 \subsubsection{Timing Actuators}
 
@@ -552,5 +609,57 @@ If the user taps the START button in the InputActivity interface, the applicatio
 
 \bibliography{specifications-bib}{}
 \bibliographystyle{ieeetr}
+
+\pagebreak
+\appendix
+\section{Appendix}
+This section contains important lookup values for mechanical and materials calculations.
+\begin{table}[H]
+\caption{Alloying elements of \gls{aisi} 304 Stainless Steel \cite{machinery-handbook}}
+\centering
+\begin{tabularx}{\textwidth}{l l l l l l l l l Z}
+\toprule
+\textbf{Alloying Element} & Cr    & Ni     & C          & Mn        & Si         & P           & S           & N         \\
+\textbf{Wt. \%}           & 18-20 & 8-10.5 & 0.08* & 2.0* & 0.75* & 0.045* & 0.030* & 0.10*\\
+\bottomrule
+\end{tabularx}
+* Indicates maximum
+\end{table}
+\begin{table}[H]
+\caption{\gls{aisi} Type 304 Stainless Steel Mechanical Properties \cite{matweb}}
+\centering
+\begin{tabularx}{\textwidth}{llllllZ}
+\toprule
+\textbf{Yield Stress} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\ 
+215 MPa      & \multicolumn{1}{l}{505 MPa} & \multicolumn{1}{l}{193 MPa} & 0.29            & 123               & 16.2 W/m-K           & 0.5 J/g$^{\circ}$C              \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\caption{Alloying elements of 5052 Aluminium \cite{machinery-handbook}}
+\centering
+\begin{tabularx}{\textwidth}{lllllllZ}
+\toprule
+\textbf{Alloying Element} & Cr        & Cu        & Fe         & Mn        & Mg        & Zn        & Si         \\
+\textbf{Wt. \%}           & 0.15-0.35 & 0.1* & 0.04* & 0.1* & 2.2 – 2.8 & 0.1* & 0.25* \\
+\bottomrule
+\end{tabularx}
+* Indicates maximum
+\end{table}
+
+\begin{table}[H]
+\caption{Type 5052 Aluminium Mechanical Properties \cite{matweb}}
+\centering 
+\begin{tabularx}{\textwidth}{llllllZ}
+\toprule
+\textbf{Yield Stress} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\
+193 MPa      & \multicolumn{1}{l}{228 MPa} & \multicolumn{1}{l}{70.3 MPa} & 0.33            & 60                & 138 W/m-K            & 0.88 J/g$^{\circ}$C \\
+\bottomrule
+\end{tabularx}
+\label{tab:}
+\end{table}
+
+
 
 \end{document}
