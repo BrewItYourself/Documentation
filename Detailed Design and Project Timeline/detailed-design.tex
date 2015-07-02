@@ -39,6 +39,7 @@
 }
 \usepackage{float}
 \usepackage{cite}
+
 \usepackage[toc,nonumberlist,acronym]{glossaries}
 \newglossary[blg]{beer}{bls}{blo}{Beer Terminology}
 \newglossary[tlg]{technical}{tls}{tlo}{Technical Terminology}
@@ -73,7 +74,9 @@
 \newacronym{ram}{RAM}{Random Access Memory}
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
+\newacronym{usb}{USB}{Universal Serial Bus}
 \newacronym{uts}{UTS}{\gls{ultenstr}}
+\newacronym{wlan}{WLAN}{Wireless Local Area Network}
 \newacronym{xmpp}{XMPP}{Extensible Messaging and Presence Protocol}
 
 \author{\\\\}
@@ -136,17 +139,17 @@ Figure \ref{fig:block} shows relevant links between the physical, mechanical des
 \end{figure}
 
 \subsubsection{Description of System}
-The single vessel brewing system, as shown in Figure \ref{fig:block}, contains various sensors which forward the environmental parameters to the microcontroller. The data from the various sensors accurately represents the state of the fermenter and feed into digital control loops running on the microcontroller.  Data from sensor modules is obtained by a microcontroller via an I2C interface. This data is then sent to an embedded computer system over USB where it is logged in a database and used to control relevant subsystems. Control commands are sent from the embedded computer to the microcontroller, where the appropriate component can be communicated with in order to regulate the brewing environment.  The embedded computer system is then able to send diagnostic information and push notifications to a mobile device through a WLAN connection.
+The single vessel brewing system, as shown in Figure \ref{fig:block}, contains various sensors which forward the environmental parameters to the microcontroller. The data from the various sensors accurately represents the state of the fermenter and feed into digital control loops running on the microcontroller.  Data from sensor modules is obtained by a microcontroller via an \gls{i2c} interface. This data is then sent to an embedded computer system over \gls{usb} where it is logged in a database and used to control relevant subsystems. Control commands are sent from the embedded computer to the microcontroller, where the appropriate component can be communicated with in order to regulate the brewing environment.  The embedded computer system is then able to send diagnostic information and push notifications to a mobile device through a \gls{wlan} connection.
 
 \subsubsection{Designing and Not Designing Components}
 The following is an outline of the components in the block diagram and the requirements associated for each Designing (D) and Non-Designing (ND) component.
 
 \begin{itemize}
 \item\textbf{Sensors}
-\\ND: Sensors being used in the vessel are not being designed.  Instead, off-the-shelf sensors are being purchased and integrated into the system.  Relevant sensor types for this system include, but aren’t limited to, pH sensors, volume sensors, flow meters, temperature probes, etc.
+\\ND: Sensors being used in the vessel are not being designed.  Instead, off-the-shelf sensors are being purchased and integrated into the system.  Relevant sensor types for this system include, but aren't limited to, pH sensors, volume sensors, flow meters, temperature probes, etc.
 
 \item\textbf{Microcontroller(s)}
-ND: The hardware of the microcontroller is not being designed since that’s outside the scope of this project. The system instead uses an off-the-shelf microcontroller.
+ND: The hardware of the microcontroller is not being designed since that's outside the scope of this project. The system instead uses an off-the-shelf microcontroller.
 D: The software running on the microcontroller is being designed. This software mainly consists of digital control loops for interfacing with the sensors and power electronic circuitry.
 
 \item\textbf{Conical Fermentation Vessel}
@@ -302,7 +305,7 @@ P is the working pressure of the vessel\\
 r is the radius of the vessel\\
 FS is the factor of safety\\
 $­\sigma_{uts}$ is the \gls{uts} of the material\\
-E is the non-dimensional efficiency of a welded seam\\\\
+E is the non-dimensional efficiency of a welded seam\\
 
 \noindent{Therefore:}
 \begin{equation}
@@ -323,7 +326,7 @@ The outer tank thickness can now be specified using the mass of the inner tank a
 \end{center}
 \end{figure}
 
-Formula \ref{eq:stress} was found using the Mechanical Engineer’s Handbook \cite{mech-handbook}.
+Formula \ref{eq:stress} was found using the Mechanical Engineer's Handbook \cite{mech-handbook}.
 The maximum stress experienced by the collar of the outer tank occurs at the inner edge of the collar.  The \gls{uts} of aluminium can be used as this stress to determine the minimum sheet thickness required to support the fermenter.
 
 \begin{equation}
@@ -333,10 +336,10 @@ The maximum stress experienced by the collar of the outer tank occurs at the inn
 
 \noindent{Where:} \\
 t is the sheet thickness\\
-m is the reciprocal of Poisson’s Ratio\\
+m is the reciprocal of Poisson's Ratio\\
 a is the outer diameter of the collar\\
 b is the inner diameter of the collar\\
-w is the applied force on the collar\\\\
+w is the applied force on the collar\\
 
 \noindent{Therefore:}
 \begin{equation}
@@ -478,17 +481,17 @@ The purpose behind the design of the power electronic circuitry is to be able to
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{servo-large-actuator-circuit.png}
+\includegraphics[scale=0.20]{servo-large-actuator-circuit.png}
 \caption{Large Servo Motor Power Circuit}
 \label{fig:servo-large-actuator-circuit}
 \end{center}
 \end{figure}
 
-However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the micro-controller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
+However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the microcontroller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{servo-small-actuator-circuit.png}
+\includegraphics[scale=0.20]{servo-small-actuator-circuit.png}
 \caption{Small Servo Motor Power Circuit}
 \label{fig:servo-small-actuator-circuit}
 \end{center}
@@ -498,7 +501,7 @@ The heating element alluded to in the previous section can easily be realised by
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{heater-hysteresis-circuit.png}
+\includegraphics[scale=0.20]{heater-hysteresis-circuit.png}
 \caption{Hysteresis Loop Controller Power Circuit}
 \label{fig:heater-hysteresis-circuit}
 \end{center}
@@ -506,7 +509,7 @@ The heating element alluded to in the previous section can easily be realised by
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{heater-pid-circuit.png}
+\includegraphics[scale=0.20]{heater-pid-circuit.png}
 \caption{\gls{pid} Controller Power Circuit}
 \label{fig:heater-pid-circuit}
 \end{center}
@@ -516,7 +519,7 @@ Both the mechanical mixer and the cooling system are driven by the same componen
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{motor-thyristor-dc-circuit.png}
+\includegraphics[scale=0.20]{motor-thyristor-dc-circuit.png}
 \caption{Thyristor Bridge Motor Power Circuit}
 \label{fig:motor-thyristor-dc-circuit}
 \end{center}
@@ -525,7 +528,7 @@ Both the mechanical mixer and the cooling system are driven by the same componen
 Only the mechanical mixing motor requires voltage control to control the speed of the mixing. Since the cooling system operates on a hysteresis control scheme, the motor used to pump refrigerant only needs to be turned on or off. As such, the power circuitry for this system could be modified to use a simpler diode bridge rectifier circuit and a relay instead of the thyristor bridge, however for the purpose of bulk component shipment it is easier to build 2 identical thyristor bridge rectifier circuits to power both large DC motors.
 
 \subsection{Computer System}
-The computer systems consist of three main components, the embedded central computer, the micro-controller and sensor pairs, as well as a Web Server and Database pair to allow for storage and communications.  The detailed description of each subcomponent and the methods of interaction between them is discussed in this section.
+The computer systems consist of three main components, the embedded central computer, the microcontroller and sensor pairs, as well as a Web Server and Database pair to allow for storage and communications.  The detailed description of each subcomponent and the methods of interaction between them is discussed in this section.
 \subsubsection{Embedded Computer}
 The primary function of the embedded computer system is to aggregate data in close to real-time from the multiple sensors used in the design.  Analysis of this data is crucial for determining the current progress in the \gls{mash}, \gls{sparge}, and boiling of the \gls{wort}.  For specific analysis of sensor data please see subsection \ref{subsec:sensor}.
 
@@ -543,8 +546,8 @@ core_freq_min=250
 
 The operating system chosen was the \gls{arm} build of Ubuntu 14.04 \gls{lts}, codename Trusty Tahr, as well as \gls{ros} Jade Turtle for sensor coordination and communication.  Ubuntu 14.04 was chosen over the default Raspbian operating system for increased security due to the use of SELinux policies.  Since the \gls{rpi} will be acting as a LAMP server as well for mobile interaction and remote notifications, enforcing read only access over the configured port of choice is a necessity. For an in depth overview of the mobile application please see subsection \ref{subsec:mobile-app}.  Additionally, the \gls{lts} version of Ubuntu was chosen for a maximum of five years support, as well as increased compatibility and reliability for repository packages specific to the trusty distribution.
 
-\subsubsection{Sensors and Micro-Controllers}\label{subsec:sensor}
-Every sensor in the system is paired with a micro-controller to enable a modular design and a plug and play like support.  By adding more sensors to the system, more information can be provided as feedback to enable better logging and regulation of the brewing environment.  The only mandatory sensors for the system are a main temperature sensor for the \gls{wort} and flow meters on the liquid inputs and outputs of the system.  By introducing additional sensors, such as pH and density sensors, certain yield thresholds of interest in the \gls{sparge} and fermentation procedure can be met rather than approximated.  Additionally, this will allow for a tier based configuration for the automated vessel to reduce cost and complexity if desired.  As the end goal for this project is to have a community influenced input, having a customizable sensor configuration with open hardware and software pairs is encouraged.  For maximum affordability the Arduino compatible Teensy-LC microcontroller is used to poll the sensors and report data, however any Arduino compatible microcontroller may be used. The bridge between the \gls{ros} instance on the \gls{rpi} and the Arduino compatible microcontroller is achieved through the use of the ROSserial package.  Example code for obtaining data from a TMP102 temperature sensor over \gls{i2c} at address 0x91 \cite{tmp102} can be seen below \cite{rosserial}.
+\subsubsection{Sensors and Microcontrollers}\label{subsec:sensor}
+Every sensor in the system is paired with a microcontroller to enable a modular design and a plug and play like support.  By adding more sensors to the system, more information can be provided as feedback to enable better logging and regulation of the brewing environment.  The only mandatory sensors for the system are a main temperature sensor for the \gls{wort} and flow meters on the liquid inputs and outputs of the system.  By introducing additional sensors, such as pH and density sensors, certain yield thresholds of interest in the \gls{sparge} and fermentation procedure can be met rather than approximated.  Additionally, this will allow for a tier based configuration for the automated vessel to reduce cost and complexity if desired.  As the end goal for this project is to have a community influenced input, having a customizable sensor configuration with open hardware and software pairs is encouraged.  For maximum affordability the Arduino compatible Teensy-LC microcontroller is used to poll the sensors and report data, however any Arduino compatible microcontroller may be used. The bridge between the \gls{ros} instance on the \gls{rpi} and the Arduino compatible microcontroller is achieved through the use of the ROSserial package.  Example code for obtaining data from a TMP102 temperature sensor over \gls{i2c} at address 0x91 \cite{tmp102} can be seen below \cite{rosserial}.
 
 \begin{lstlisting}
 #include <Wire.h>
@@ -592,7 +595,7 @@ void loop()
 }
 \end{lstlisting}
 
-Additionally, controllers can be linked to the system via Arduino compatible micro-controllers and receive inputs based on sensor data gathered via \gls{ros} publications.  To improve the resolution or accuracy of data and controls, the polling interval of each of the micro-controllers can be calibrated appropriately.  Since most sensors will remain idle for a majority of the brewing process, their sampling rates can be scaled using a simple algorithm as suggested in the code sample below.
+Additionally, controllers can be linked to the system via Arduino compatible microcontrollers and receive inputs based on sensor data gathered via \gls{ros} publications.  To improve the resolution or accuracy of data and controls, the polling interval of each of the microcontrollers can be calibrated appropriately.  Since most sensors will remain idle for a majority of the brewing process, their sampling rates can be scaled using a simple algorithm as suggested in the code sample below.
 
 \begin{lstlisting}
 #include <std_msgs/Float32.h>
@@ -749,8 +752,40 @@ Steve Jung & 20411563 & 53 \\
 \subsection{Potential Safety Hazards}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
-\subsection{Project Timeline}
+\subsection{Project Time-Line}
+Due to amount of design required for each of the subcomponents, the time-line has been split into individual Gantt charts for Mechanical Design, Electrical Systems, Computer Systems, and Mobile Development shown in Figures \ref{fig:gantt-mech}, \ref{fig:gantt-elec}, \ref{fig:gantt-comp}, and \ref{fig:gantt-mobi} respectively.  Please note that each of these Gantt charts have overlapping dates.
 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{gantt-mech.png}
+\caption{Gantt Chart for Mechanical Subcomponent Time-Line}
+\label{fig:gantt-mech}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3]{gantt-elec.png}
+\caption{Gantt Chart for Electrical Subcomponent Time-Line}
+\label{fig:gantt-elec}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{gantt-comp.png}
+\caption{Gantt Chart for Computer Subcomponent Time-Line}
+\label{fig:gantt-comp}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{gantt-mobi.png}
+\caption{Gantt Chart for Mobile Development Subcomponent Time-Line}
+\label{fig:gantt-mobi}
+\end{center}
+\end{figure}
 
 \pagebreak
 \printglossary[type=acronym]
