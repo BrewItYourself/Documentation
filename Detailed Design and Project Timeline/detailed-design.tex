@@ -52,6 +52,11 @@
 \newglossaryentry{wort}{type=beer,name=Wort, text=wort, description=The solution of grain sugars strained from the mash tun \cite{beer-terms}.}
 
 \newglossaryentry{rpi}{type=technical, name=Raspberry Pi 2 Model B, text=Raspberry Pi, description=The Raspberry Pi 2 Model B is the second generation Raspberry Pi. It replaced the original Raspberry Pi 1 Model B+ in February 2015.}
+\newglossaryentry{ass}{type=technical, name=Austenitic Stainless Steel, description=An alloy family of stainless steels high in \gls{austenite} phase grain structure.}
+\newglossaryentry{austenite}{type=technical, name=Austenite, description=A non magnetic crystal structure of iron.  May exist in solid solution with the aid of alloying elements.}
+\newglossaryentry{intergrancor}{type=technical, name=Inter-granular Corrosion, description=Corrosion caused by varying composition between the grains and grain boundaries within a metal.  Welding 304 stainless steel may lead to intergranular corrosion if not cooled properly.}
+\newglossaryentry{ultenstr}{type=technical, name=Ultimate Tensile Strength, description=The maximum tensile stress a material can experience before breaking or fracturing}
+\newglossaryentry{yieldstr}{type=technical, name=Yield Stress, description=The stress at which a material begins to plastically deform.}
 
 %\newacronym{abv}{ABV}{Alcohol By Volume}
 \newacronym{aisi}{AISI}{American Iron and Steel Institute}
@@ -64,10 +69,11 @@
 \newacronym{html5}{HTML5}{HyperText Markup Language 5}
 \newacronym{lamp}{LAMP}{Lamp Apache MySQL PHP}
 \newacronym{lts}{LTS}{Long Term Support}
+\newacronym{pid}{PID}{Proportional-Integral-Derivative}
 \newacronym{ram}{RAM}{Random Access Memory}
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
-\newacronym{uts}{UTS}{Ultimate Tensile Strength}
+\newacronym{uts}{UTS}{\gls{ultenstr}}
 \newacronym{xmpp}{XMPP}{Extensible Messaging and Presence Protocol}
 
 \author{\\\\}
@@ -271,7 +277,7 @@ Sanitation
 
 \section{Detailed Design}
 \subsection{Mechanical Design}
-The mechanical design component of this project is comprised of two aspects: the structural design of the fermenter and the thermodynamics of the heating and cooling systems.  There are many sources for pre-fabricated fermenters for home brewing, but the custom nature of this device required the construction of a purpose-built tank, shown in figure \ref{fig:fermenter-wall-cad}.  The tank features a double walled construction to enclose the heating and cooling systems of the inner tank as well as provide thermal insulation.
+The mechanical design component of this project is comprised of two aspects: the structural design of the fermenter and the thermodynamics of the heating and cooling systems.  There are many sources for pre-fabricated fermenters for home brewing, but the custom nature of this device required the construction of a purpose-built tank, shown in Figure \ref{fig:fermenter-wall-cad}.  The tank features a double walled construction to enclose the heating and cooling systems of the inner tank as well as provide thermal insulation.
 
 \begin{figure}[H]
 \begin{center}
@@ -283,7 +289,7 @@ The mechanical design component of this project is comprised of two aspects: the
 
 \subsubsection{Material}
 To meet the requirements of food grade equipment, the components of the fermenter that will come into contact with the brewing ingredients are to be constructed from stainless steel.  While the \gls{cfia} does not outline specific details for the materials to be used in food processing, it states that, ``Food contact surfaces of equipment and utensils are smooth, non-corrosive, non-absorbent, non-toxic, free from pitting, cracks or crevices, and able to withstand repeated cleaning and sanitation" \cite{food-grade}.
-To meet the non-corrosive guideline set by the \gls{cfia}, \gls{aisi} 304 stainless steel was the specific alloy of stainless steel chosen for the construction of the food-contacting surfaces of the fermenter.  304 is a member of the authenticate family of stainless steels, which have the best general corrosion resistance of any family of stainless steel.  They also contain low levels of carbon, aiding in weld-ability.  The low levels of carbon also act to reduce the generation of inter-granular corrosion caused by welding, over the life of the component \cite{asme-eng}.  Tables of the composition of 304 and pertinent mechanical properties are included in \ref{app:304}. The outer tank of the fermenter will not come into contact with the brewing ingredients, and as such, other materials separate from stainless steel may be used.  Aluminium was chosen to be the material for the outer tank due to its low mass and financial cost.
+To meet the non-corrosive guideline set by the \gls{cfia}, \gls{aisi} 304 stainless steel was the specific alloy of stainless steel chosen for the construction of the food-contacting surfaces of the fermenter.  304 is a member of the \gls{ass} family (see \gls{austenite}), which have the best general corrosion resistance of any family of stainless steel.  They also contain low levels of carbon, aiding in weld-ability.  The low levels of carbon also act to reduce the generation of \gls{intergrancor} caused by welding, over the life of the component \cite{asme-eng}.  Tables of the composition of 304 and pertinent mechanical properties are included in \ref{app:304}. The outer tank of the fermenter will not come into contact with the brewing ingredients, and as such, other materials separate from stainless steel may be used.  Aluminium was chosen to be the material for the outer tank due to its low mass and financial cost.
 
 \subsubsection{Tank Structure}
 When contemplating the mechanical design for a double-walled system such as this fermenter, the wall thickness for the inner tank should be determined early as this will dictate the structural support required between the inner and outer tanks, as well as the frame to support the entire vessel. Forced carbonation of different brews can reach up to 30psi.  The American Society of Mechanical Engineers (ASME) outlines a function for determining the wall thickness of a pressure vessel as
@@ -295,7 +301,7 @@ t = \frac{P_{work} \times r \times FS}{\sigma_{uts} \times E}
 P is the working pressure of the vessel\\
 r is the radius of the vessel\\
 FS is the factor of safety\\
-$­\sigma_{uts}$ is the ultimate tensile strength of the material\\
+$­\sigma_{uts}$ is the \gls{uts} of the material\\
 E is the non-dimensional efficiency of a welded seam\\\\
 
 \noindent{Therefore:}
@@ -313,7 +319,7 @@ The outer tank thickness can now be specified using the mass of the inner tank a
 \begin{center}
 \includegraphics[scale=0.20]{fermenter-cad.png}
 \caption{Illustration of the double wall design for the fermenter}
-\label{fig:fermenter-wall-cad}
+\label{fig:fermenter-cad}
 \end{center}
 \end{figure}
 
@@ -339,11 +345,184 @@ t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma
 The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125 in. was selected to meet the requirements for the outer tank.
 
 \subsection{Electrical System}
-The electrical system consists of 2 main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
-\subsubsection{Heating and Cooling Controller}
+The electrical system consists of two main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
+\subsubsection{Controller Designs}
+Of the four controllable subsystems, the heating and cooling for fine temperature regulation is the highest priority for robust design. The mixing and actuators are necessary for the final realized system, but can easily be constructed with off-the-shelf components and minimal design effort. The actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors. The continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
 
-\subsubsection{Motor Controller}
-\subsubsection{Timing Actuators}
+\begin{equation}
+P(s) = \frac{K}{s(\tau s + 1)}
+\label{eq:gear-angle}
+\end{equation}
+
+which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilises to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the mixing DC motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
+Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in \ref{eq:heat-system}.
+
+\begin{equation}
+Qh = Qs + Ql
+\label{eq:heat-system}
+\end{equation}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{heat-system-diagram.png}
+\caption{A heat system diagram for a closed volume of liquid}
+\label{fig:heat-system-diagram}
+\end{center}
+\end{figure}
+
+If we differentiate with respect to time, we get Equation \ref{eq:dt} \cite{heat-modelling}.
+\begin{equation}
+P = C \times \frac{dT}{dt} + k(T - T_{a})
+\label{eq:dt}
+\end{equation}
+\noindent{where} P is the power input into the system, C is the thermal capacity of the water, k is the thermal conductance of the tank, Ta is the ambient temperature of the room, T is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
+
+\begin{equation}
+P(s) = C \times s \times T(s) + kT(s)
+\label{eq:laplace-heat}
+\end{equation}
+
+\noindent{resulting} in Equation \ref{eq:result-heat}
+
+\begin{equation}
+\frac{T(s)}{P(s)} = \frac{1}{Cs + k}
+\label{eq:result-heat}
+\end{equation}
+
+\noindent{our} transfer function model of the heating of a volume of liquid. Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water. Since our system is designed to hold 50L of water, we get the result shown in \ref{eq:value-heat}
+
+\begin{equation}
+C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
+\label{eq:value-heat}
+\end{equation}
+
+Since the inner tank of our conical vessel is well insulated, we know that the value of k (in units of Watts per Kelvin) is small. However, calculating k mathematically is difficult and it is easier to instead perform some system identification on the completed system.
+The controller used to control the temperature of the volume of water can be implemented in many different ways, however we are deciding to look at 2 main options: a \gls{pid} controller, and a hysteresis-thermostat controller. Pictured below in Figure \ref{fig:hysteresis-block-diagram} and Figure \ref{fig:pid-block-diagram} are Simulink models created in MATLAB to simulate these two possible controller schemes. Additionally, the tuned \gls{pid} parameters used in the latter diagram, as calculated using the built-in Simulink \gls{pid} Tuner tool-kit, are listed in Figure \ref{fig:pid-parameters}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.50]{hysteresis-block-diagram.png}
+\caption{Hysterisis loop temperature controller and plant model}
+\label{fig:hysteresis-block-diagram}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.50]{pid-block-diagram.png}
+\caption{\gls{pid} temperature controller and plant model}
+\label{fig:pid-block-diagram}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.50]{pid-parameters.png}
+\caption{\gls{pid} controller parameters}
+\label{fig:pid-parameters}
+\end{center}
+\end{figure}
+
+In these models, the step input has an amplitude of 88 degrees Celsius, simulating the heating of water from 10$^{\circ}$C to 98$^{\circ}$C; and the maximum allowable control signal is 1500W, which equates to 12.5A on standard 120V household power. We are looking to optimise a number of parameters with the selection of one of these control systems. Specifically, we want the best combination of settling time and steady-state error versus cost and complexity of implementation. Pictured below in Figure \ref{fig:hysteresis-step-lossless} and Figure \ref{fig:pid-step-lossless} are the step responses of each of these systems, simulated assuming a k-value of zero (well insulated, lossless vessel).
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{hysteresis-step-lossless.png}
+\caption{Lossless hysteresis loop control step response with control signal}
+\label{fig:hysteresis-step-lossless}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{pid-step-lossless.png}
+\caption{Lossless \gls{pid} control step response with control signal}
+\label{fig:pid-step-lossless}
+\end{center}
+\end{figure}
+
+It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{hysteresis-step-lossy.png}
+\caption{Lossy hysteresis loop step response with control signal}
+\label{fig:hysteresis-step-lossy}
+\end{center}
+\end{figure}
+
+We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as k increases the steady-state error quickly worsens to an unacceptable level.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{pid-steps-various-k.png}
+\caption{PID controller step response for various thermal conductivities}
+\label{fig:pid-steps-various-k}
+\end{center}
+\end{figure}
+
+For the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below k = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of k since the critical value is over four times larger.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{hysteresis-step-critical.png}
+\caption{Critically lossy hysteresis loop step response with control signal}
+\label{fig:hysteresis-step-critical}
+\end{center}
+\end{figure}
+
+As such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
+
+\subsubsection{Power Electronics Design}
+The purpose behind the design of the power electronic circuitry is to be able to effectively implement the control strategies required to meet our design criteria. With the chosen control systems discussed in the previous section, the basic design of the power electronic circuits is straightforward. Depending on the size and power requirements of the servomotors needed to actuate the mechanical chutes and valves of the system, one of two circuits can be implemented. For large servos, the circuit pictured in Figure \ref{fig:servo-large-actuator-circuit} can be implemented to power the motor.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{servo-large-actuator-circuit.png}
+\caption{Large Servo Motor Power Circuit}
+\label{fig:servo-large-actuator-circuit}
+\end{center}
+\end{figure}
+
+However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the micro-controller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{servo-small-actuator-circuit.png}
+\caption{Small Servo Motor Power Circuit}
+\label{fig:servo-small-actuator-circuit}
+\end{center}
+\end{figure}
+
+The heating element alluded to in the previous section can easily be realised by a length of electrically insulated resistive wire, which can be coiled and wrapped around the base of the conical vessel. The specifics of wire itself (resistivity, thickness, length) are arbitrary by themselves, but they must be selected to yield a total resistance of 9.6$\sigma$. That value corresponds to a current of 12.5A being forced by 120V, which in turn equates to 1500W. The 1500W value is chosen so that the entire system can be powered by a standard 15A household circuit without tripping the breaker, plus a safety margin so that other small components can be powered while the main heaters are engaged. Figure \ref{fig:heater-hysteresis-circuit} and Figure \ref{fig:heater-pid-circuit} illustrate the circuits for the hysteresis control and the unselected \gls{pid} control schemes respectively. The Hysteresis control is realised with a simple circuit consisting of a relay between the 120V power supplied by the house and the 9.6 Ohm resistive heater load. The \gls{pid} controller could have been realised with a triac whose firing angle is varied to modulate the power output to the heating coil.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{heater-hysteresis-circuit.png}
+\caption{Hysteresis Loop Controller Power Circuit}
+\label{fig:heater-hysteresis-circuit}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{heater-pid-circuit.png}
+\caption{\gls{pid} Controller Power Circuit}
+\label{fig:heater-pid-circuit}
+\end{center}
+\end{figure}
+
+Both the mechanical mixer and the cooling system are driven by the same component; a DC motor. The circuit used to power the DC motor is pictured in Figure \ref{fig:motor-thyristor-dc-circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12V to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modelled as an inductance in series with a resistance, followed by a reverse-emf voltage.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.30]{motor-thyristor-dc-circuit.png}
+\caption{Thyristor Bridge Motor Power Circuit}
+\label{fig:motor-thyristor-dc-circuit}
+\end{center}
+\end{figure}
+
+Only the mechanical mixing motor requires voltage control to control the speed of the mixing. Since the cooling system operates on a hysteresis control scheme, the motor used to pump refrigerant only needs to be turned on or off. As such, the power circuitry for this system could be modified to use a simpler diode bridge rectifier circuit and a relay instead of the thyristor bridge, however for the purpose of bulk component shipment it is easier to build 2 identical thyristor bridge rectifier circuits to power both large DC motors.
 
 \subsection{Computer System}
 The computer systems consist of three main components, the embedded central computer, the micro-controller and sensor pairs, as well as a Web Server and Database pair to allow for storage and communications.  The detailed description of each subcomponent and the methods of interaction between them is discussed in this section.
@@ -362,10 +541,10 @@ sdram_freq_min=250
 core_freq_min=250
 \end{lstlisting}
 
-For a list of stock specifications and configurations for the \gls{rpi}, please see Appendix \ref{app:rpi}.  The operating system chosen was the \gls{arm} build of Ubuntu 14.04 \gls{lts}, codename Trusty Tahr, as well as \gls{ros} Jade Turtle for sensor coordination and communication.  Ubuntu 14.04 was chosen over the default Raspbian operating system for increased security due to the use of SELinux policies.  Since the \gls{rpi} will be acting as a LAMP server as well for mobile interaction and remote notifications, enforcing read only access over the configured port of choice is a necessity. For an in depth overview of the mobile application please see subsection \ref{subsec:mobile-app}.  Additionally, the \gls{lts} version of Ubuntu was chosen for a maximum of five years support, as well as increased compatibility and reliability for repository packages specific to the trusty distribution.
+The operating system chosen was the \gls{arm} build of Ubuntu 14.04 \gls{lts}, codename Trusty Tahr, as well as \gls{ros} Jade Turtle for sensor coordination and communication.  Ubuntu 14.04 was chosen over the default Raspbian operating system for increased security due to the use of SELinux policies.  Since the \gls{rpi} will be acting as a LAMP server as well for mobile interaction and remote notifications, enforcing read only access over the configured port of choice is a necessity. For an in depth overview of the mobile application please see subsection \ref{subsec:mobile-app}.  Additionally, the \gls{lts} version of Ubuntu was chosen for a maximum of five years support, as well as increased compatibility and reliability for repository packages specific to the trusty distribution.
 
 \subsubsection{Sensors and Micro-Controllers}\label{subsec:sensor}
-Every sensor in the system is paired with a micro-controller to enable a modular design and a plug and play like support.  By adding more sensors to the system, more information can be provided as feedback to enable better logging and regulation of the brewing environment.  The only mandatory sensors for the system are a main temperature sensor for the \gls{wort} and flow meters on the liquid inputs and outputs of the system.  By introducing additional sensors, such as pH and density sensors, certain yield thresholds of interest in the \gls{sparge} and fermentation procedure can be met rather than approximated.  Additionally, this will allow for a tier based configuration for the automated vessel to reduce cost and complexity if desired.  As the end goal for this project is to have a community influenced input, having a customizable sensor configuration with open hardware and software pairs is encouraged.  For maximum affordability the Arduino compatible Teensy-LC microcontroller is used to poll the sensors and report data, however any Arduino compatible microcontroller may be used.  Technical specifications for the Teensy-LC microcontroller can be seen in Appendix \ref{app:teensy}  The bridge between the \gls{ros} instance on the \gls{rpi} and the Arduino compatible microcontroller is achieved through the use of the ROSserial package.  Example code for obtaining data from a TMP102 temperature sensor over \gls{i2c} at address 0x91 \cite{tmp102} can be seen below \cite{rosserial}.
+Every sensor in the system is paired with a micro-controller to enable a modular design and a plug and play like support.  By adding more sensors to the system, more information can be provided as feedback to enable better logging and regulation of the brewing environment.  The only mandatory sensors for the system are a main temperature sensor for the \gls{wort} and flow meters on the liquid inputs and outputs of the system.  By introducing additional sensors, such as pH and density sensors, certain yield thresholds of interest in the \gls{sparge} and fermentation procedure can be met rather than approximated.  Additionally, this will allow for a tier based configuration for the automated vessel to reduce cost and complexity if desired.  As the end goal for this project is to have a community influenced input, having a customizable sensor configuration with open hardware and software pairs is encouraged.  For maximum affordability the Arduino compatible Teensy-LC microcontroller is used to poll the sensors and report data, however any Arduino compatible microcontroller may be used. The bridge between the \gls{ros} instance on the \gls{rpi} and the Arduino compatible microcontroller is achieved through the use of the ROSserial package.  Example code for obtaining data from a TMP102 temperature sensor over \gls{i2c} at address 0x91 \cite{tmp102} can be seen below \cite{rosserial}.
 
 \begin{lstlisting}
 #include <Wire.h>
@@ -474,25 +653,7 @@ A \gls{lamp} server is the current solution for delivering information from the 
 \end{center}
 \end{figure}
 
-An important component of the web server is the server to client communication. The communication will be done through using the \gls{gcm}. This service allows a server to send messages to clients on various platforms \cite{gcm}. There are 2 types of \gls{gcm} server protocols that can be used to implement the server.  Table \ref{tab:decision-matrix} provides an overview of software design decisions and their respective weighted benefits.
-
-\begin{table}[H]
-\caption{GCM Protocols}
-\centering
-\begin{tabularx}{\textwidth}{l l Z}
-\toprule
-\textbf{Protocol} & \textbf{Messaging}    & \textbf{Upstream/Downstream}     \\
-\midrule
-XMPP     & Asynchronous & Upstream and downstream \\\\
-HTTP     & Synchronous  & Downstream only \\
-\bottomrule
-\end{tabularx}
-\label{tab:gcm-protocol}
-\end{table}
-
-The Web Server will implement a \gls{xmpp} protocol since it requires client to server (downstream) communication as well as server to client (upstream) communication. Since HTTP cannot offer that, it is not a viable option.
-
-There are two types of messages that can be sent using \gls{gcm}, notification and data messages. The differences between the notification and data messages is that \gls{gcm} automatically displays the notification messages on the client's behalf. Where as the data messages has to be parsed by the client in order to be used. Another difference is while the notification type messages has fixed key value pairs, data type messages can have custom ones. Both message types are in \gls{json} format, which is shown below.
+An important component of the web server is the server to client communication. The communication will be done through using the \gls{gcm}. This service allows a server to send messages to clients on various platforms \cite{gcm}.  There are two types of messages that can be sent using \gls{gcm}, notification and data messages. The differences between the notification and data messages is that \gls{gcm} automatically displays the notification messages on the client's behalf. Where as the data messages has to be parsed by the client in order to be used. Another difference is while the notification type messages has fixed key value pairs, data type messages can have custom ones. Both message types are in \gls{json} format, which is shown below.
 
 \begin{lstlisting}
 {
@@ -508,43 +669,7 @@ The ``to" value holds the unique application id and the data block holds the key
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
-The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
-Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple \gls{ios} platform and the \gls{html5} web platform. Table [criterion table] below shows the criterion used to choose the appropriate platform. \gls{gcm} support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the \gls{gcm} service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smart-phones can use the mobile application. The more smart-phones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
-
-\begin{table}[H]
-\caption{Criterion table}
-\centering
-\begin{tabularx}{\textwidth}{l l l l Z}
-\toprule
-\textbf{Criteria:} & GCM Support & Implementation & Accessibility & Resources \\
-\textbf{Weight:}   & 40\%        & 25\%           & 10\%          & 15\% \\
-\bottomrule
-\end{tabularx}
-\label{tab:criteria}
-\end{table}
-
-Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
-GCM Support: Both Android and iOS platforms have GCM client Application Program Interface (API)s developed by Google, and there are detailed steps in how to create a GCM client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
-Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various Software Development Kit (SDK)s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
-Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
-Resources: Developing the application for Android can be done using the Android Studio (Integrated Development Environment) IDE and can be done on various computers \cite{astudio}. There are no specific IDEs to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
-
-\begin{table}[H]
-\caption{Decision Matrix}
-\centering
-\begin{tabularx}{\textwidth}{l l l l l Z}
-\toprule
- & GCM Support & Implementation & Accessibility & Resources & Total\\
-\midrule
-Native Android & 10 & 8 & 8 & 8 & 8 \\\\
-Native iOS & 10 & 6 & 1.5 & 4 & 6.25 \\\\
-HTML WebApp & 5 & 4 & 10 & 6 & 4.9 \\
-\bottomrule
-\end{tabularx}
-\label{tab:decision-matrix}
-\end{table}
-
-The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the \gls{gcm} client side of the system to communicate with the \gls{gcm} Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
+The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
 
 \subsubsection{Real Time Data}
 This component of the application provides data from the brew system to the user's device. There are main two methods that the application provides data to the user. The first method is to display the current state of the brew in system through push notifications. Whenever a change is detected in the vessel such as temperature change, process change or any other state changes there might be, there would be a notification on the client's device to let the user know. The second method of the component is to provide interface that provides data statistics based on sensor data recorded by previous brews. This section will focus on the design for both methods. Figure \ref{fig:gcm-push-notification} demonstrates the design flow for the push notification service.
@@ -596,11 +721,36 @@ If the user taps the START button in the InputActivity interface, the applicatio
 
 \section{Discussion and Project Timeline}
 \subsection{Evaluation of Final Design}
+The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device.
 \subsection{Use of Advanced Knowledge}
+The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE356 (Database Systems), ECE454 (Distributed Systems) and ECE452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE380 and ECE 481, and the design and analysis of the power electronic components uses concepts take directly from ECE463.
 \subsection{Creativity, Novelty, Elegance}
+The novelty of our design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
 \subsection{Student Hours}
+The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
+
+\begin{table}[H]
+\caption{Total Hours}
+\centering
+\begin{tabularx}{\textwidth}{l l Z}
+\toprule
+\textbf{Group Member} & \textbf{ID} & \textbf{Hours} \\
+\midrule
+Kevin Nause & 20413332 & 69 \\\\
+Mathieu Tremblay & 20420813 & 57 \\\\
+Scott Wood & 20379649 & 63 \\\\
+Steve Jung & 20411563 & 53 \\
+\bottomrule
+\end{tabularx}
+\label{tab:hours}
+\end{table}
+
+
 \subsection{Potential Safety Hazards}
+The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
+
 \subsection{Project Timeline}
+
 
 \pagebreak
 \printglossary[type=acronym]
@@ -610,9 +760,8 @@ If the user taps the START button in the InputActivity interface, the applicatio
 \bibliography{specifications-bib}{}
 \bibliographystyle{ieeetr}
 
-\pagebreak
 \appendix
-\section{Appendix}
+\section{Appendix}\label{app:304}
 This section contains important lookup values for mechanical and materials calculations.
 \begin{table}[H]
 \caption{Alloying elements of \gls{aisi} 304 Stainless Steel \cite{machinery-handbook}}
@@ -630,7 +779,7 @@ This section contains important lookup values for mechanical and materials calcu
 \centering
 \begin{tabularx}{\textwidth}{llllllZ}
 \toprule
-\textbf{Yield Stress} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\ 
+\textbf{\gls{yieldstr}} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\ 
 215 MPa      & \multicolumn{1}{l}{505 MPa} & \multicolumn{1}{l}{193 MPa} & 0.29            & 123               & 16.2 W/m-K           & 0.5 J/g$^{\circ}$C              \\
 \bottomrule
 \end{tabularx}
@@ -653,7 +802,7 @@ This section contains important lookup values for mechanical and materials calcu
 \centering 
 \begin{tabularx}{\textwidth}{llllllZ}
 \toprule
-\textbf{Yield Stress} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\
+\textbf{\gls{yieldstr}} & \textbf{UTS}    & \textbf{Elasticity}        & \textbf{Poisson Ratio} & \textbf{Hardness} & \textbf{ Conductivity} & \textbf{Heat Capacity} \\
 193 MPa      & \multicolumn{1}{l}{228 MPa} & \multicolumn{1}{l}{70.3 MPa} & 0.33            & 60                & 138 W/m-K            & 0.88 J/g$^{\circ}$C \\
 \bottomrule
 \end{tabularx}
