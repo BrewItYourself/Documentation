@@ -115,13 +115,18 @@
     \end{center}
 \end{titlepage}
 
-\pagebreak
-\tableofcontents
-%\listoffigures
-%\listoftables
-\pagebreak
 \justify
 \onehalfspacing
+
+\pagebreak
+\section*{Abstract}
+\section*{Acknowledgements}
+\tableofcontents
+\listoffigures
+\listoftables
+\pagebreak
+
+\setcounter{section}{0}
 \section{High-Level Description of Project}
 \subsection{Motivation}
 The art of home brewing has been steadily gaining popularity over the past 35 years alongside the rise of craft breweries in North America, so much so that in 2010 there were over 2000 craft breweries in the United States, after starting with only 8 in 1980 \cite{craft-beer}. The traditional method for homebrewing requires various components, constant monitoring and heavy maintenance. There should be a solution which reduces complexity, making it much more affordable and practical for home use. We hope to create a single vessel system that would make the home brewing process precise, automated and compact, all at a reasonable price.
@@ -279,6 +284,10 @@ Sanitation
 \pagebreak
 
 \section{Detailed Design}
+\section{Prototype Data}
+\subsection{Photographs}
+\subsection{Experimental Data}
+\subsection{Discussion}
 \subsection{Mechanical Design}
 The mechanical design component of this project is comprised of two aspects: the structural design of the fermenter and the thermodynamics of the heating and cooling systems.  There are many sources for pre-fabricated fermenters for home brewing, but the custom nature of this device required the construction of a purpose-built tank, shown in Figure \ref{fig:fermenter-wall-cad}.  The tank features a double walled construction to enclose the heating and cooling systems of the inner tank as well as provide thermal insulation.
 
@@ -722,7 +731,7 @@ InputActivity: The InputActivity allows the user to select a previous brew proce
 SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
 If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
-\section{Discussion and Project Timeline}
+\section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
 The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device.
 \subsection{Use of Advanced Knowledge}
