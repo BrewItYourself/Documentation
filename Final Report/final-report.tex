@@ -39,6 +39,7 @@
 }
 \usepackage{float}
 \usepackage{cite}
+\usepackage[final]{pdfpages}
 
 \usepackage[toc,nonumberlist,acronym]{glossaries}
 \newglossary[blg]{beer}{bls}{blo}{Beer Terminology}
@@ -807,6 +808,12 @@ Due to amount of design required for each of the subcomponents, the time-line ha
 \bibliographystyle{ieeetr}
 
 \appendix
+%Appendix A
+\includepdf[scale=0.9,pages=1,pagecommand=\section{Appendix}]{forms/symposium_prototype_hazard_disclosure_form.pdf}
+
+%Appendix B
+\includepdf[scale=0.9,pages=1,pagecommand=\section{Appendix}]{forms/symposium_floor_plan_request_form.pdf}
+
 \section{Appendix}\label{app:304}
 This section contains important lookup values for mechanical and materials calculations.
 \begin{table}[H]
