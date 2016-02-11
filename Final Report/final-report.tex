@@ -685,6 +685,44 @@ For message passing, this application uses the data message type. This is becaus
 \subsection{Mobile Application}\label{subsec:mobile-app}
 The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
+Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table [criterion table] below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
+
+\begin{table}[H]
+\centering
+\caption{Criterion Table}
+\label{fig:criterion-table}
+\begin{tabular}{lllll}
+Criteria: & GCM Support & Implementation & Accessibility & Resource \\
+Weight:   & 40\%        & 25\%           & 10\%          & 15\%    
+\end{tabular}
+\end{table}
+
+
+Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
+GCM Support: Both Android and iOS platforms have GCM client Application Program Interface (API)s developed by Google, and there are detailed steps in how to create a GCM client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
+Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various Software Development Kit (SDK)s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
+Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7% of smartphones run the Android OS while 15.7% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
+Resources: Developing the application for Android can be done using the Android Studio (Integrated Development Environment) IDE and can be done on various computers \cite{astudio}. There are no specific IDEs to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
+
+\begin{table}[H]
+\centering
+\caption{Decision Matrix}
+\label{fig:decision-matrix}
+\begin{tabular}{llllll}
+Criteria:      & GCM Support & Implementation & Accessibility & Resource & TOTAL \\
+Native Android & 10          & 8              & 8             & 8        & 8     \\
+Native iOS     & 10          & 6              & 1.5           & 4        & 6.25  \\
+HTML Web App   & 5           & 4              & 10            & 6        & 4.9  
+\end{tabular}
+\end{table}
+
+The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the GCM client side of the system to communicate with the GCM Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsubsection{Real Time Data}
 This component of the application provides data from the brew system to the user's device. There are main two methods that the application provides data to the user. The first method is to display the current state of the brew in system through push notifications. Whenever a change is detected in the vessel such as temperature change, process change or any other state changes there might be, there would be a notification on the client's device to let the user know. The second method of the component is to provide interface that provides data statistics based on sensor data recorded by previous brews. This section will focus on the design for both methods. Figure \ref{fig:gcm-push-notification} demonstrates the design flow for the push notification service.
 
@@ -733,6 +771,7 @@ InputActivity: The InputActivity allows the user to select a previous brew proce
 SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
 If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
+
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
 The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device.
@@ -740,71 +779,25 @@ The final design meets the objective and specifications listed in the project sp
 The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE356 (Database Systems), ECE454 (Distributed Systems) and ECE452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE380 and ECE 481, and the design and analysis of the power electronic components uses concepts take directly from ECE463.
 \subsection{Creativity, Novelty, Elegance}
 The novelty of our design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
-\subsection{Student Hours}
-The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
 
-\begin{table}[H]
-\caption{Total Hours}
-\centering
-\begin{tabularx}{\textwidth}{l l Z}
-\toprule
-\textbf{Group Member} & \textbf{ID} & \textbf{Hours} \\
-\midrule
-Kevin Nause & 20413332 & 69 \\\\
-Mathieu Tremblay & 20420813 & 57 \\\\
-Scott Wood & 20379649 & 63 \\\\
-Steve Jung & 20411563 & 53 \\
-\bottomrule
-\end{tabularx}
-\label{tab:hours}
-\end{table}
-
-
-\subsection{Potential Safety Hazards}
+\subsection{Quality of Risk Assessment}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
-\subsection{Project Time-Line}
-Due to amount of design required for each of the subcomponents, the time-line has been split into individual Gantt charts for Mechanical Design, Electrical Systems, Computer Systems, and Mobile Development shown in Figures \ref{fig:gantt-mech}, \ref{fig:gantt-elec}, \ref{fig:gantt-comp}, and \ref{fig:gantt-mobi} respectively.  Please note that each of these Gantt charts have overlapping dates.
+\subsection{Student Workload}
+The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-mech.png}
-\caption{Gantt Chart for Mechanical Subcomponent Time-Line}
-\label{fig:gantt-mech}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.3]{gantt-elec.png}
-\caption{Gantt Chart for Electrical Subcomponent Time-Line}
-\label{fig:gantt-elec}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-comp.png}
-\caption{Gantt Chart for Computer Subcomponent Time-Line}
-\label{fig:gantt-comp}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-mobi.png}
-\caption{Gantt Chart for Mobile Development Subcomponent Time-Line}
-\label{fig:gantt-mobi}
-\end{center}
-\end{figure}
 
 \pagebreak
 \printglossary[type=acronym]
 \printglossary[type=beer]
 \printglossary[type=technical]
 
+\pagebreak
+
 \bibliography{specifications-bib}{}
 \bibliographystyle{ieeetr}
+
+\pagebreak
 
 \appendix
 \section{Appendix}\label{app:304}
