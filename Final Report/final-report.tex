@@ -160,7 +160,7 @@ Figure \ref{fig:block} shows relevant links between the physical, mechanical des
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.58]{block-diagram.png}
+\includegraphics[scale=0.25]{block-diagram.png}
 \caption{Block Diagram outlining the interactions between the computer, electrical, and mechanical systems}
 \label{fig:block}
 \end{center}
@@ -308,11 +308,11 @@ Sanitation
 
 \section{Detailed Design}
 \subsection{Mechanical Design}
-The mechanical design component of this project is comprised of two aspects: the structural design of the fermenter and the thermodynamics of the heating and cooling systems.  There are many sources for pre-fabricated fermenters for home brewing, but the custom nature of this device required the construction of a purpose-built tank, shown in Figure \ref{fig:fermenter-wall-cad}.  The tank features a double walled construction to enclose the heating and cooling systems of the inner tank as well as provide thermal insulation.
+The mechanical design component of this project is comprised of two aspects: the structural design of the fermenter and the thermodynamics of the heating and cooling systems. There are many sources for pre-fabricated fermenters for home brewing, but the custom nature of this device required the construction of a purpose-built tank, shown in Figure \ref{fig:fermenter-wall-cad}.  The tank features a double walled construction to enclose the heating and cooling systems of the inner tank as well as provide thermal insulation.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{fermenter-wall-cad.png}
+\includegraphics[scale=0.35]{fermenter-wall-cad.png}
 \caption{Illustration of the double wall design for the fermenter}
 \label{fig:fermenter-wall-cad}
 \end{center}
@@ -381,14 +381,14 @@ Section to add prototype data to mechanical section
 \subsection{Electrical System}
 The electrical system consists of two main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
 \subsubsection{Controller Designs}
-Of the four controllable subsystems, the heating and cooling for fine temperature regulation is the highest priority for robust design. The mixing and actuators are necessary for the final realized system, but can easily be constructed with off-the-shelf components and minimal design effort. The actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors. The continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
+Of the four controllable subsystems, the heating and cooling for fine temperature regulation is the highest priority for robust design. The pump and actuators are necessary for the final realized system, but can easily be constructed with off-the-shelf components and minimal design effort. The actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors. The continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
 
 \begin{equation}
 P(s) = \frac{K}{s(\tau s + 1)}
 \label{eq:gear-angle}
 \end{equation}
 
-which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilises to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the mixing DC motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
+which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the mixing DC motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
 Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in \ref{eq:heat-system}.
 
 \begin{equation}
@@ -713,8 +713,8 @@ Platforms considered to develop the mobile application includes the Native Andro
 
 \begin{table}[H]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Criterion Table}
+\label{fig:criterion-table}
 \begin{tabular}{lllll}
 Criteria: & GCM Support & Implementation & Accessibility & Resource \\
 Weight:   & 40\%        & 25\%           & 10\%          & 15\%    
@@ -730,8 +730,8 @@ Resources: Developing the application for Android can be done using the Android 
 
 \begin{table}[H]
 \centering
-\caption{My caption}
-\label{my-label}
+\caption{Decision Matrix}
+\label{fig:decision-matrix}
 \begin{tabular}{llllll}
 Criteria:      & GCM Support & Implementation & Accessibility & Resource & TOTAL \\
 Native Android & 10          & 8              & 8             & 8        & 8     \\
