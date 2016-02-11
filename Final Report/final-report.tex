@@ -120,7 +120,28 @@
 
 \pagebreak
 \section*{Abstract}
+
+\textbf{Automated Single Vessel Home Brewery System}
+
+The art of home brewing has been steadily gaining popularity over the past 35 years alongside
+the rise of craft breweries in North America, so much so that in 2010 there were over 2000 craft
+breweries in the United States, after starting with only 8 in 1980. The objective of this project is
+to combine home brewing experience with engineering design, and construct a single vessel
+brewing system. By maintaining a strict control of key parameters, the brewing process is
+regulated using a combination of fluid mechanics, heat transfer, digital controls, power systems,
+embedded robotics and mobile development. The Robotics Operating System (ROS), allows for
+a design where sensors can be added to a modular setup and provide feedback. By receiving
+feedback from temperature readings, density measurements and capacitance monitoring, the
+brewing process can be accurately recorded, shared, and automated by the system. The single
+vessel design allows for reduced complexity compared to the traditional home brewing method
+which requires various components, constant monitoring and heavy maintenance.
+
+
 \section*{Acknowledgements}
+We would like to thank Douglas Harder for consulting us on our project and evaluating our prototype. 
+
+\pagebreak
+
 \tableofcontents
 \listoffigures
 \listoftables
@@ -740,63 +761,13 @@ The final design meets the objective and specifications listed in the project sp
 The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE356 (Database Systems), ECE454 (Distributed Systems) and ECE452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE380 and ECE 481, and the design and analysis of the power electronic components uses concepts take directly from ECE463.
 \subsection{Creativity, Novelty, Elegance}
 The novelty of our design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
-\subsection{Student Hours}
-The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
 
-\begin{table}[H]
-\caption{Total Hours}
-\centering
-\begin{tabularx}{\textwidth}{l l Z}
-\toprule
-\textbf{Group Member} & \textbf{ID} & \textbf{Hours} \\
-\midrule
-Kevin Nause & 20413332 & 69 \\\\
-Mathieu Tremblay & 20420813 & 57 \\\\
-Scott Wood & 20379649 & 63 \\\\
-Steve Jung & 20411563 & 53 \\
-\bottomrule
-\end{tabularx}
-\label{tab:hours}
-\end{table}
-
-
-\subsection{Potential Safety Hazards}
+\subsection{Quality of Risk Assessment}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
-\subsection{Project Time-Line}
-Due to amount of design required for each of the subcomponents, the time-line has been split into individual Gantt charts for Mechanical Design, Electrical Systems, Computer Systems, and Mobile Development shown in Figures \ref{fig:gantt-mech}, \ref{fig:gantt-elec}, \ref{fig:gantt-comp}, and \ref{fig:gantt-mobi} respectively.  Please note that each of these Gantt charts have overlapping dates.
+\subsection{Student Workload}
+The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-mech.png}
-\caption{Gantt Chart for Mechanical Subcomponent Time-Line}
-\label{fig:gantt-mech}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.3]{gantt-elec.png}
-\caption{Gantt Chart for Electrical Subcomponent Time-Line}
-\label{fig:gantt-elec}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-comp.png}
-\caption{Gantt Chart for Computer Subcomponent Time-Line}
-\label{fig:gantt-comp}
-\end{center}
-\end{figure}
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.30]{gantt-mobi.png}
-\caption{Gantt Chart for Mobile Development Subcomponent Time-Line}
-\label{fig:gantt-mobi}
-\end{center}
-\end{figure}
 
 \pagebreak
 \printglossary[type=acronym]
@@ -805,6 +776,8 @@ Due to amount of design required for each of the subcomponents, the time-line ha
 
 \bibliography{specifications-bib}{}
 \bibliographystyle{ieeetr}
+
+\pagebreak
 
 \appendix
 \section{Appendix}\label{app:304}
