@@ -41,8 +41,10 @@
 \usepackage{cite}
 
 \usepackage[toc,nonumberlist,acronym]{glossaries}
+
 \newglossary[blg]{beer}{bls}{blo}{Beer Terminology}
 \newglossary[tlg]{technical}{tls}{tlo}{Technical Terminology}
+
 \makeglossaries
 
 \newglossaryentry{grist}{type=beer, name=Grist, text=grist, description=The combination of milled grains to be used in a particular brew. Also sometimes applied to hops \cite{beer-terms}.}
@@ -704,7 +706,41 @@ The ``to" value holds the unique application id and the data block holds the key
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
-The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
+The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
+
+The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
+Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table [criterion table] below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
+
+\begin{table}[H]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lllll}
+Criteria: & GCM Support & Implementation & Accessibility & Resource \\
+Weight:   & 40\%        & 25\%           & 10\%          & 15\%    
+\end{tabular}
+\end{table}
+
+
+Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
+GCM Support: Both Android and iOS platforms have GCM client Application Program Interface (API)s developed by Google, and there are detailed steps in how to create a GCM client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
+Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various Software Development Kit (SDK)s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
+Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7% of smartphones run the Android OS while 15.7% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
+Resources: Developing the application for Android can be done using the Android Studio (Integrated Development Environment) IDE and can be done on various computers \cite{astudio}. There are no specific IDEs to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
+
+\begin{table}[H]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{llllll}
+Criteria:      & GCM Support & Implementation & Accessibility & Resource & TOTAL \\
+Native Android & 10          & 8              & 8             & 8        & 8     \\
+Native iOS     & 10          & 6              & 1.5           & 4        & 6.25  \\
+HTML Web App   & 5           & 4              & 10            & 6        & 4.9  
+\end{tabular}
+\end{table}
+
+The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the GCM client side of the system to communicate with the GCM Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
 
 \subsubsection{Real Time Data}
 This component of the application provides data from the brew system to the user's device. There are main two methods that the application provides data to the user. The first method is to display the current state of the brew in system through push notifications. Whenever a change is detected in the vessel such as temperature change, process change or any other state changes there might be, there would be a notification on the client's device to let the user know. The second method of the component is to provide interface that provides data statistics based on sensor data recorded by previous brews. This section will focus on the design for both methods. Figure \ref{fig:gcm-push-notification} demonstrates the design flow for the push notification service.
@@ -769,10 +805,9 @@ The power electronic systems pose many hazards to the building of this system. T
 The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
 
 
-\pagebreak
+\clearpage
+
 \printglossary[type=acronym]
-\printglossary[type=beer]
-\printglossary[type=technical]
 
 \bibliography{specifications-bib}{}
 \bibliographystyle{ieeetr}
