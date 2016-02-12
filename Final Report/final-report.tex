@@ -73,6 +73,7 @@
 \newacronym{lts}{LTS}{Long Term Support}
 \newacronym{pid}{PID}{Proportional-Integral-Derivative}
 \newacronym{ram}{RAM}{Random Access Memory}
+\newacronym{rest}{REST}{RESTful}
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
 \newacronym{usb}{USB}{Universal Serial Bus}
@@ -144,6 +145,7 @@ We would like to thank Douglas Harder for consulting us on our project and evalu
 \pagebreak
 
 \tableofcontents
+\pagebreak
 \listoffigures
 \listoftables
 \pagebreak
@@ -717,6 +719,13 @@ An important component of the web server is the server to client communication. 
 The ``to" value holds the unique application id and the data block holds the key value pairs that are encapsulated in the message.
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
+\subsubsection{Prototype Algorithms}
+
+\subsubsection{\gls{gcm} Server}
+
+\subsubsection{\gls{rest} API}
+
+
 \subsection{Mobile Application}\label{subsec:mobile-app}
 The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
 
@@ -806,6 +815,7 @@ InputActivity: The InputActivity allows the user to select a previous brew proce
 SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
 If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
+\subsubsection{\gls{gcm} Client}
 
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
