@@ -159,7 +159,7 @@ The Brew It Yourself team would like to acknowledge a number of people for provi
 The art of home brewing has been steadily gaining popularity over the past 35 years alongside the rise of craft breweries in North America, so much so that in 2010 there were over 2000 craft breweries in the United States, after starting with only 8 in 1980 \cite{craft-beer}. The traditional method for homebrewing requires various components, constant monitoring and heavy maintenance. There should be a solution which reduces complexity, making it much more affordable and practical for home use. We hope to create a single vessel system that would make the home brewing process precise, automated and compact, all at a reasonable price.
 \subsection{Project Objective}
 The objective of this project is to combine homebrewing experience with engineering design, and construct a single vessel brewing system. By maintaining a strict control of key parameters, the brewing process is regulated using a combination of fluid mechanics, heat transfer, digital controls, power systems, embedded robotics and mobile development. \gls{ros}, allows for a design where sensors can be added to a modular setup and provide feedback. By receiving feedback from temperature readings, density measurements and pH monitoring, the brewing process can be accurately recorded, shared, and automated by the system. 
-\subsection{Block Diagram}
+\subsection{Block Diagram}\label{sec:block-diagram}
 Figure \ref{fig:block} shows relevant links between the physical, mechanical design of the brewing system, as well as the computer systems and their underlying software.
 
 \begin{figure}[H]
@@ -209,7 +209,7 @@ D: The software running on the microcontroller is being designed. This software 
 
 \section{Project Specifications}
 This section outlines the functional and non-functional requirements of the project design.
-\subsection{Functional Specifications}\label{FS}
+\subsection{Functional Specifications}\label{sec:functional}
 Table \ref{tab:func} describes each functional requirement and highlights whether it is essential or not to the completion of the project.
 
 \newcolumntype{Z}{>{\raggedright\arraybackslash}X}
@@ -274,7 +274,7 @@ Reproducibility
 \end{table}
 
 \pagebreak
-\subsection{Non-Functional Specifications}
+\subsection{Non-Functional Specifications}\label{sec:non-functional}
 Table \ref{tab:non-func} describes each non-functional requirement and highlights whether it is essential or not to the completion of the project.
 
 \begin{table}[H]
@@ -379,7 +379,7 @@ t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma
 \end{equation}
 The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125in. was selected to meet the requirements for the outer tank.
 
-\subsubsection{Integration of Waste Removal System}
+\subsubsection{Integration of Waste Removal System}\label{sec:waste-removal}
 The main challenge following the the design and construction of the structure of the fermenter is the separation of desired brewing products from spent ingredients.  The full rendering below, Figure \ref{fig:full-vessel-render} shows the full fluid circuit.
 
 \begin{figure}[H]
@@ -424,7 +424,7 @@ In summary, the mechanical design and renderings contributed to the final mechan
 
 \subsection{Electrical System}
 The electrical system consists of two main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
-\subsubsection{Controller Designs}
+\subsubsection{Controller Designs}\label{sec:controller-design}
 Of the four controllable subsystems, the heating and cooling for fine temperature regulation is the highest priority for robust design. The pump and actuators are necessary for the final realised system, but can easily be constructed with off-the-shelf components and minimal design effort.
 \noindent The actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors.
 \noindent The continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
@@ -736,7 +736,7 @@ The two fundamental controllers that require communications for the operation of
 \end{center}
 \end{figure}
 
-\subsubsection{Web Server and Database}
+\subsubsection{Web Server and Database}\label{sec:webserver}
 A \gls{lamp} server is the current solution for delivering information from the embedded computer to the mobile application.  All communications and parameters are to be communicated using a \gls{json} format.  The database will consist of relational connections between recipes, instructions, ingredients, sensors, and logged data as demonstrated in Figure \ref{fig:database-diagram}.
 
 \begin{figure}[H]
@@ -762,7 +762,7 @@ An important component of the web server is the server to client communication. 
 The ``to'' value holds the unique application id and the data block holds the key value pairs that are encapsulated in the message.
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
-\subsubsection{Sparging Algorithms}
+\subsubsection{Sparging Algorithms}\label{sec:no-sparge}
 The no-\gls{sparge} technique uses approximately 25\% more grain than a standard recipe and allows for the sparging process to be bypassed with no ill effects to the brew.  As a result, this method produces a richer, smoother-tasting \gls{wort} with the same \gls{gravity} as a standard recipe, but with a \gls{mash} and optionally a \gls{lauter} process that makes the \gls{wort} more robust and pH stable.  Not only is the end result more desirable to the consumer, but having a pH stable \gls{wort} allows for a reduced risk of souring due to bacteria and diminishes the chances of abnormal deviations.  Ultimately, this process greatly reduces the complexity of the all grain brewing process as well as the overall complexity of the system.
 
 The following calculations combine the scaling-up of the \gls{grain-bill} with a three-step infusion-\gls{mash} that makes the whole process more manageable \cite{sparging}.  Below is a list of the relevant symbols and terms used for input parameters, constants, and output parameters respectively.
@@ -885,9 +885,9 @@ public static void gcmSendMessage(String message) {
 \end{lstlisting}
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
-\noindent This satisfies the functional requirement ``Application Notification'' seen in the Functional Specification section \ref{FS}, where the system can provide notifications to the user simply by calling the \gls{url} with the message that it wants the user to receive.
+\noindent This satisfies the functional requirement ``Application Notification'' seen in the \nameref{sec:functional} Section \ref{sec:functional}, where the system can provide notifications to the user simply by calling the \gls{url} with the message that it wants the user to receive.
 
-\noindent The \textit{BrewLogResource}  is implemented to fulfil the ``Database'' requirement as seen in Functional Specification section \ref{FS}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
+\noindent The \textit{BrewLogResource}  is implemented to fulfil the ``Database'' requirement as seen in \nameref{sec:functional} Section \ref{sec:functional}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
  
 \begin{lstlisting}
 @Path("brewlog")
@@ -1032,7 +1032,11 @@ The second component of the application is to allow the user to control the brew
 
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
-The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. The functional requirements ``Database'' and ``Application Notification'' is implemented through a \gls{rest}Ful web server with various resources. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device. 
+The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. The functional requirements ``Database'' and ``Application Notification'' is implemented through a \gls{rest}Ful web server with various resources. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device.
+
+In summary, the \gls{mash} component of the brewing process and the \gls{trub} removal component can be achieved by using the filter basket outlined in Section \ref{sec:waste-removal}, \nameref{sec:waste-removal}.  The \gls{sparge} requirement of the brewing process is accomplished by utilizing the no-sparge method outlined in Section \ref{sec:no-sparge}.  Temperature regulation and the creation of the \gls{wort} is controlled by both the heating and cooling systems, their respective designs, and implementations which is shown in Section \ref{sec:controller-design}.  The final requirements of the brewing process such as dispensing the grains, dispensing yeast, dispensing hops, aeration of the \gls{wort}, and the kegging process is all achieved by actuating the appropriate valves.  Since the implementation of these components is rather trivial, a general overview of the system is shown in the \ref{sec:block-diagram} in Section \ref{sec:block-diagram}.  The Application Notifications and Logging Database are handled by the Computer System in Section \ref{sec:webserver} and allows for user interaction with the prototype device.  Finally, due to the physical design of the conical fermenter and the feedback from control systems and sensors, temperature accuracy, volume control, volume size, mobility, and sanitation is achieved for the entire system.
+
+Overall, each essential Functional Specification and Non-Functional Specification outlined in Sections \ref{sec:functional} and \ref{sec:non-functional} respectively have been achieved and the all grain brewing process can be successfully automated.
 \subsection{Use of Advanced Knowledge}
 The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE 356 (Database Systems), ECE 454 (Distributed Systems) and ECE 452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE 356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE 452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE 454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE 380 (Analog Control Systems) and ECE 481 (Digital Control Systems), and the design and analysis of the power electronic components uses concepts taken directly from ECE 463 (Design \& Applications of Power Electronic Converters).
 \subsection{Creativity, Novelty, Elegance}
