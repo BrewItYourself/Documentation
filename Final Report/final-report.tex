@@ -239,7 +239,7 @@ Completion of the Brewing Process
 \item \Gls{pitch} the Yeast
 \item Kegging and Dispensing
 \end{itemize}
-\noindent in its entirety and in the correct order.  For more information on the brewing process and the terms used, please see the Glossary.
+\noindent In its entirety and in the correct order.  For more information on the brewing process and the terms used, please see the Glossary.
 \\\\
 Heating Unit
 & Essential
@@ -346,7 +346,7 @@ $FS$ is the factor of safety\\
 $­\sigma_{uts}$ is the \gls{uts} of the material\\
 $E$ is the non-dimensional efficiency of a welded seam\\
 
-\noindent{Therefore:}
+\noindent Therefore:
 \begin{equation}
 t = \frac{206.84kpa \times 254mm \times 9}{505MPa \times 0.6}
 \end{equation}
@@ -380,7 +380,7 @@ $a$ is the outer diameter of the collar\\
 $b$ is the inner diameter of the collar\\
 $w$ is the applied force on the collar\\
 
-\noindent{Therefore:}
+\noindent Therefore:
 \begin{equation}
 t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma^{2}b^{2} - 4(m + 1)a^{2}b^{2}\ln(\frac{a}{b}) \Big)
 \end{equation}
@@ -392,7 +392,7 @@ The main challenge following the the design and construction of the structure of
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=1]{full-vessel-render.png}
-\caption{Full Vessel Render}
+\caption{A render of the full vessel}
 \label{fig:full-vessel-render}
 \end{center}
 \end{figure}
@@ -402,22 +402,22 @@ The first step in the process is the removal of the batch from the fermenting ve
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=1]{filter-basket-render.png}
-\caption{Filter Basket Render}
+\caption{A render of the filter basket}
 \label{fig:filter-basket-render}
 \end{center}
 \end{figure}
 
-The secondary vessel features a removable, clamp-on door attached to the mesh basket.  This aids with cleanup and preparation for the subsequent brew.  Leftover ingredients and \gls{trub} can be contained in this vessel during the brewing process until the user is ready to remove any waste. A “Chugger Pump” is then used to replace the remaining brew into the primary vessel to proceed with fermentation process.  A rendering of the fitment of the pump is shown below in Figure \ref{fig:chugger-pump}.
+The secondary vessel features a removable, clamp-on door attached to the mesh basket.  This aids with cleanup and preparation for the subsequent brew.  Leftover ingredients and \gls{trub} can be contained in this vessel during the brewing process until the user is ready to remove any waste. A ``Chugger Pump'' is then used to replace the remaining brew into the primary vessel to proceed with fermentation process.  A rendering of the fitment of the pump is shown below in Figure \ref{fig:chugger-pump}.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=1]{chugger-pump.png}
-\caption{Chugger Pump}
+\caption{A render of the chugger pump mounting position}
 \label{fig:chugger-pump}
 \end{center}
 \end{figure}
 
-The chugger was chosen for its durability and resilience, specifically when moving large quantities of sugar rich wort.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
+The chugger pump \cite{chugger} was chosen for its durability and resilience, specifically when moving large quantities of sugar rich wort.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
 
 In summary, the mechanical design and renderings contributed to the final mechanical prototype as shown in Figure \ref{fig:mechanical-prototype}.
 
@@ -433,17 +433,17 @@ In summary, the mechanical design and renderings contributed to the final mechan
 The electrical system consists of two main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
 \subsubsection{Controller Designs}
 Of the four controllable subsystems, the heating and cooling for fine temperature regulation is the highest priority for robust design. The pump and actuators are necessary for the final realised system, but can easily be constructed with off-the-shelf components and minimal design effort.
-\noindent{The} actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors.
-\noindent{The} continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
+\noindent The actuators used in the system to open/close various valves and chutes are implemented using servomotors as the electrical component. The controllers used to control these actuations outputs a simple on-off signal and does not require feedback in the form of sensors.
+\noindent The continuous-time transfer function model of a DC motor with motor voltage as input and gear angle as output is shown Equation \ref{eq:gear-angle}
 
 \begin{equation}
 P(s) = \frac{K}{s(\tau s + 1)}
 \label{eq:gear-angle}
 \end{equation}
 
-\noindent{which} is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the pump motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
+\noindent Which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the pump motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
 
-\noindent{Since} the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in \ref{eq:heat-system}.
+\noindent Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in Figure \ref{eq:heat-system}.
 
 \begin{equation}
 Qh = Qs + Ql
@@ -453,38 +453,38 @@ Qh = Qs + Ql
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.50]{heat-system-diagram.png}
-\caption{A heat system diagram for a closed volume of liquid}
+\caption{A heat system diagram for a closed volume of liquid \cite{heat-modelling}}
 \label{fig:heat-system-diagram}
 \end{center}
 \end{figure}
 
-If we differentiate with respect to time, we get Equation \ref{eq:dt} \cite{heat-modelling}.
+\noindent If we differentiate with respect to time, we get Equation \ref{eq:dt} \cite{heat-modelling}.
 \begin{equation}
 P = C \times \frac{dT}{dt} + k(T - T_{a})
 \label{eq:dt}
 \end{equation}
-\noindent{where} $P$ is the power input into the system, $C$ is the thermal capacity of the water, $k$ is the thermal conductance of the tank, $T_{a}$ is the ambient temperature of the room, $T$ is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
+\noindent Where $P$ is the power input into the system, $C$ is the thermal capacity of the water, $k$ is the thermal conductance of the tank, $T_{a}$ is the ambient temperature of the room, $T$ is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
 
 \begin{equation}
 P(s) = C \times s \times T(s) + kT(s)
 \label{eq:laplace-heat}
 \end{equation}
 
-\noindent{resulting} in Equation \ref{eq:result-heat}
+\noindent Resulting in Equation \ref{eq:result-heat}
 
 \begin{equation}
 \frac{T(s)}{P(s)} = \frac{1}{Cs + k}
 \label{eq:result-heat}
 \end{equation}
 
-\noindent{our} transfer function model of the heating of a volume of liquid. Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water. Since our system is designed to hold 50L of water, we get the result shown in \ref{eq:value-heat}
+\noindent Our transfer function model of the heating of a volume of liquid. Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water. Since our system is designed to hold 50L of water, we get the result shown in \ref{eq:value-heat}
 
 \begin{equation}
 C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
 \label{eq:value-heat}
 \end{equation}
 
-\noindent{Since} the inner tank of our conical vessel is well insulated, we know that the value of $k$ (in units of Watts per Kelvin) is small. However, calculating $k$ mathematically is difficult and it is easier to instead perform some system identification on the completed system.
+\noindent Since the inner tank of our conical vessel is well insulated, we know that the value of $k$ (in units of Watts per Kelvin) is small. However, calculating $k$ mathematically is difficult and it is easier to instead perform some system identification on the completed system.
 The controller used to control the temperature of the volume of water can be implemented in many different ways, however we are deciding to look at 2 main options: a \gls{pid} controller, and a hysteresis-thermostat controller. Pictured below in Figure \ref{fig:hysteresis-block-diagram} and Figure \ref{fig:pid-block-diagram} are Simulink models created in MATLAB to simulate these two possible controller schemes. Additionally, the tuned \gls{pid} parameters used in the latter diagram, as calculated using the built-in Simulink \gls{pid} Tuner tool-kit, are listed in Figure \ref{fig:pid-parameters}.
 
 \begin{figure}[H]
@@ -529,7 +529,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{It} can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
+\noindent It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
 
 \begin{figure}[H]
 \begin{center}
@@ -539,7 +539,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{We} can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
+\noindent We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
 
 \begin{figure}[H]
 \begin{center}
@@ -549,7 +549,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{For} the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
+\noindent For the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
 
 \begin{figure}[H]
 \begin{center}
@@ -559,7 +559,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{As} such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
+\noindent As such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
 
 \subsubsection{Power Electronics Design}
 The purpose behind the design of the power electronic circuitry is to be able to effectively implement the control strategies required to meet our design criteria. With the chosen control systems discussed in the previous section, the basic design of the power electronic circuits is straightforward. Depending on the size and power requirements of the servomotors needed to actuate the mechanical chutes and valves of the system, one of two circuits can be implemented. For large servos, the circuit pictured in Figure \ref{fig:servo-large-actuator-circuit} can be implemented to power the motor.
@@ -572,7 +572,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent{However}, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the microcontroller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
+\noindent However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the microcontroller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
 
 \begin{figure}[H]
 \begin{center}
