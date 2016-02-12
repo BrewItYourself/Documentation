@@ -68,6 +68,7 @@
 
 %\newacronym{abv}{ABV}{Alcohol By Volume}
 \newacronym{aisi}{AISI}{American Iron and Steel Institute}
+\newacronym{api}{API}{Application Program Interface}
 \newacronym{arm}{ARM}{Acorn \gls{risc} Machine}
 \newacronym{cfia}{CFIA}{Canadian Food Inspection Agency (CFIA)}
 \newacronym{gcm}{GCM}{Google Cloud Messaging}
@@ -84,6 +85,7 @@
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
 \newacronym{usb}{USB}{Universal Serial Bus}
+\newacronym{url}{URL}{Uniform Resource Identifier}
 \newacronym{uts}{UTS}{\gls{ultenstr}}
 \newacronym{wlan}{WLAN}{Wireless Local Area Network}
 \newacronym{xmpp}{XMPP}{Extensible Messaging and Presence Protocol}
@@ -97,6 +99,7 @@
 \begin{titlepage}
     \begin{center}
         \vspace*{1cm}
+        
         
         \textsc{\LARGE University of Waterloo}\\ [0.1cm]
         \textsc{\Large Faculty of Engineering}\\
@@ -845,7 +848,7 @@ V_{t} = G_{n}(1.3125 + (R_{n} - 1)
 By using the methods listed above, the no-sparge process is successfully implemented while maintaining compatibility with standard recipes and the all grain brewing process.
 
 \subsubsection{\gls{rest} Web Server}
-The \gls{rest}ful Web Server is implemented using the \gls{jersey}. Each functionality specified is mapped to a URL endpoint called a \gls{resource}. A sample of a resource is shown in the code sample below. The following code samples are all written in Java.
+The \gls{rest}ful Web Server is implemented using the \gls{jersey}. The \gls{jersey} provides various \gls{api}s and services to streamline web server development. Services such as \gls{json} parsing and formatting, error logging and URL mappings are all handled by this framework. There are two main functionalities that is implemented in the web server; the \textit{GCMNotificationResource} and the \textit{BrewLogResource}. Each functionality is mapped to a \gls{url} endpoint called a \gls{resource}. A sample of the \textit{GCMNotificationResource} is shown in the code sample below. The following code samples are all written in Java.
 
 \begin{lstlisting}
 @Path("gcm_notification")
@@ -863,12 +866,10 @@ public class GCMNotificationResource {
 }
 \end{lstlisting}
 
-\noindent The above resource is called whenever the system needs to notify the client. The resource calls the function \textit{gcmSendMessage} which sends the message to the \gls{gcm} server. The \gls{gcm} server is an external service that is used to push notifications to client applications. A sample code of the textit{gcmSendMessage} function is shown below where the message being sent to the client is put into a \gls{json} object to be passed to the \gls{gcm} server. 
-\linebreak
-\linebreak
+\noindent The above resource is called whenever the system needs to notify the client. The resource calls the function \textit{gcmSendMessage} which sends the message to the \gls{gcm} server. The \gls{gcm} server is an external service that is used to push notifications to client applications. A sample code of the \textit{gcmSendMessage} function is shown below where the message being sent to the client is put into a \gls{json} object to be passed to the \gls{gcm} server. 
+
 \begin{lstlisting}
 public static void gcmSendMessage(String message) {
-    try {
         // Prepare JSON containing the GCM message content. What to send and where to send.
         JSONObject jGcmData = new JSONObject();
         JSONObject jData = new JSONObject();
@@ -890,16 +891,13 @@ public static void gcmSendMessage(String message) {
         // Send GCM message content.
         OutputStream outputStream = conn.getOutputStream();
         outputStream.write(jGcmData.toString().getBytes());
-
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
 }
 \end{lstlisting}
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
-\noindent This satisfies the functional requirement "Application Notification" seen in section \ref{FS}, where the system can provide notifications to the user simply by calling the URL with the message that it wants the user to receive.
-\noindent Another resource implemented with the \gls{rest} server is the \textit{BrewLogResource}. This \gls{resource} is created to satisfy the "Database" requirement as seen in section \ref{FS}. The resource provides a access point from the server to the database. A portion of the resource code is shown below:
+\noindent This satisfies the functional requirement "Application Notification" seen in the Functional Specification section \ref{FS}, where the system can provide notifications to the user simply by calling the URL with the message that it wants the user to receive.
+
+\noindent The \textit{BrewLogResource}  is implemented to fulfil the "Database" requirement as seen in Functional Specification section \ref{FS}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
  
 \begin{lstlisting}
 @Path("brewlog")
