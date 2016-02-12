@@ -899,8 +899,6 @@ public static void gcmSendMessage(String message) {
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
 \noindent This satisfies the functional requirement "Application Notification" seen in section \ref{FS}, where the system can provide notifications to the user simply by calling the URL with the message that it wants the user to receive.
-\linebreak
-\linebreak
 \noindent Another resource implemented with the \gls{rest} server is the \textit{BrewLogResource}. This \gls{resource} is created to satisfy the "Database" requirement as seen in section \ref{FS}. The resource provides a access point from the server to the database. A portion of the resource code is shown below:
  
 \begin{lstlisting}
@@ -950,7 +948,8 @@ Platforms considered to develop the mobile application includes the Native Andro
 \toprule
 \textbf{Criteria:} & \textbf{GCM Support} & \textbf{Implementation}  & \textbf{Accessibility} & \textbf{Resource}\\ 
 \midrule
-Weight:   & 40\%        & 25\%           & 10\%          & 15\%    
+Weight:   & 40\%        & 25\%           & 10\%          & 15\%  \\
+\bottomrule  
 \end{tabular}
 \end{table}
 
@@ -971,7 +970,8 @@ Resources: Developing the application for Android can be done using the Android 
 \midrule
 Native Android & 10          & 8              & 8             & 8        & 8     \\
 Native iOS     & 10          & 6              & 1.5           & 4        & 6.25  \\
-HTML Web App   & 5           & 4              & 10            & 6        & 4.9  
+HTML Web App   & 5           & 4              & 10            & 6        & 4.9   \\
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -1052,7 +1052,8 @@ Table shows the amount of work contributed by each group member.
 Kevin Nause (Embedded Computers)    &                        \\
 Mathieu Tremblay (Electrical)		  &                        \\
 Scott Wood     (Mechanical)		  &                        \\
-Steve Jung     (Mobile App)  		  &                       
+Steve Jung     (Mobile App)  		  & 						 \\
+\bottomrule
 \end{tabular}
 \end{table}
 
