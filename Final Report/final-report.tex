@@ -181,7 +181,7 @@ The following is an outline of the components in the block diagram and the requi
 \\ND: Sensors being used in the vessel are not being designed.  Instead, off-the-shelf sensors are being purchased and integrated into the system.  Relevant sensor types for this system include, but aren't limited to, pH sensors, volume sensors, flow meters, temperature probes, etc.
 
 \item\textbf{Microcontroller(s)}
-ND: The hardware of the microcontroller is not being designed since that's outside the scope of this project. The system instead uses an off-the-shelf microcontroller.
+\\ND: The hardware of the microcontroller is not being designed since that's outside the scope of this project. The system instead uses an off-the-shelf microcontroller.
 D: The software running on the microcontroller is being designed. This software mainly consists of digital control loops for interfacing with the sensors and power electronic circuitry.
 
 \item\textbf{Conical Fermentation Vessel}
@@ -333,11 +333,11 @@ When contemplating the mechanical design for a double-walled system such as this
 t = \frac{P_{work} \times r \times FS}{\sigma_{uts} \times E}
 \end{equation}
 \noindent{Where:} \\
-P is the working pressure of the vessel\\
-r is the radius of the vessel\\
-FS is the factor of safety\\
+$P$ is the working pressure of the vessel\\
+$r$ is the radius of the vessel\\
+$FS$ is the factor of safety\\
 $­\sigma_{uts}$ is the \gls{uts} of the material\\
-E is the non-dimensional efficiency of a welded seam\\
+$E$ is the non-dimensional efficiency of a welded seam\\
 
 \noindent{Therefore:}
 \begin{equation}
@@ -367,11 +367,11 @@ The maximum stress experienced by the collar of the outer tank occurs at the inn
 \end{equation}
 
 \noindent{Where:} \\
-t is the sheet thickness\\
-m is the reciprocal of Poisson's Ratio\\
-a is the outer diameter of the collar\\
-b is the inner diameter of the collar\\
-w is the applied force on the collar\\
+$t$ is the sheet thickness\\
+$m$ is the reciprocal of Poisson's Ratio\\
+$a$ is the outer diameter of the collar\\
+$b$ is the inner diameter of the collar\\
+$w$ is the applied force on the collar\\
 
 \noindent{Therefore:}
 \begin{equation}
@@ -416,7 +416,7 @@ If we differentiate with respect to time, we get Equation \ref{eq:dt} \cite{heat
 P = C \times \frac{dT}{dt} + k(T - T_{a})
 \label{eq:dt}
 \end{equation}
-\noindent{where} P is the power input into the system, C is the thermal capacity of the water, k is the thermal conductance of the tank, Ta is the ambient temperature of the room, T is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
+\noindent{where} $P$ is the power input into the system, $C$ is the thermal capacity of the water, $k$ is the thermal conductance of the tank, $T_{a}$ is the ambient temperature of the room, $T$ is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
 
 \begin{equation}
 P(s) = C \times s \times T(s) + kT(s)
@@ -437,7 +437,7 @@ C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
 \label{eq:value-heat}
 \end{equation}
 
-\noindent{Since} the inner tank of our conical vessel is well insulated, we know that the value of k (in units of Watts per Kelvin) is small. However, calculating k mathematically is difficult and it is easier to instead perform some system identification on the completed system.
+\noindent{Since} the inner tank of our conical vessel is well insulated, we know that the value of $k$ (in units of Watts per Kelvin) is small. However, calculating $k$ mathematically is difficult and it is easier to instead perform some system identification on the completed system.
 The controller used to control the temperature of the volume of water can be implemented in many different ways, however we are deciding to look at 2 main options: a \gls{pid} controller, and a hysteresis-thermostat controller. Pictured below in Figure \ref{fig:hysteresis-block-diagram} and Figure \ref{fig:pid-block-diagram} are Simulink models created in MATLAB to simulate these two possible controller schemes. Additionally, the tuned \gls{pid} parameters used in the latter diagram, as calculated using the built-in Simulink \gls{pid} Tuner tool-kit, are listed in Figure \ref{fig:pid-parameters}.
 
 \begin{figure}[H]
@@ -492,7 +492,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{We} can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as k increases the steady-state error quickly worsens to an unacceptable level.
+\noindent{We} can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
 
 \begin{figure}[H]
 \begin{center}
@@ -502,7 +502,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent{For} the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below k = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of k since the critical value is over four times larger.
+\noindent{For} the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
 
 \begin{figure}[H]
 \begin{center}
@@ -568,7 +568,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{figure}
 
 \subsubsection{Prototype Circuitry}
-Since we only recently received our vessel back from the machine shop from welding, none of the test electronics have been installed. However, figure \ref{fig:Electrical-Prototype} shows a test board where the relays have been tested by powering loads, controlled by the microcontroller on the far right. The next step is to install these components and their duplicates into a NEMA-rated electrical box, affix the actuatable components to the vessel, and run the wiring between everything.
+Since we only recently received our vessel back from the machine shop from welding, none of the test electronics have been installed. However, Figure \ref{fig:electrical-prototype} shows a test board where the relays have been tested by powering loads, controlled by the microcontroller on the far right. The next step is to install these components and their duplicates into a NEMA-rated electrical box, affix the actuatable components to the vessel, and run the wiring between everything.
 
 \begin{figure}[H]
 \begin{center}
@@ -722,7 +722,8 @@ An important component of the web server is the server to client communication. 
 The ``to" value holds the unique application id and the data block holds the key value pairs that are encapsulated in the message.
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
-\subsubsection{Prototype Algorithms}
+\subsubsection{Sparging Algorithms}
+\cite{sparging}.
 
 \subsubsection{\gls{gcm} Server}
 
