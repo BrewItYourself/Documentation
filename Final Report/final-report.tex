@@ -323,7 +323,7 @@ The mechanical design component of this project is comprised of two aspects: the
 \end{figure}
 
 \subsubsection{Material}
-To meet the requirements of food grade equipment, the components of the fermenter that will come into contact with the brewing ingredients are to be constructed from stainless steel.  While the \gls{cfia} does not outline specific details for the materials to be used in food processing, it states that, ``Food contact surfaces of equipment and utensils are smooth, non-corrosive, non-absorbent, non-toxic, free from pitting, cracks or crevices, and able to withstand repeated cleaning and sanitation" \cite{food-grade}.
+To meet the requirements of food grade equipment, the components of the fermenter that will come into contact with the brewing ingredients are to be constructed from stainless steel.  While the \gls{cfia} does not outline specific details for the materials to be used in food processing, it states that, ``Food contact surfaces of equipment and utensils are smooth, non-corrosive, non-absorbent, non-toxic, free from pitting, cracks or crevices, and able to withstand repeated cleaning and sanitation'' \cite{food-grade}.
 To meet the non-corrosive guideline set by the \gls{cfia}, \gls{aisi} 304 stainless steel was the specific alloy of stainless steel chosen for the construction of the food-contacting surfaces of the fermenter.  304 is a member of the \gls{ass} family (see \gls{austenite}), which have the best general corrosion resistance of any family of stainless steel.  They also contain low levels of carbon, aiding in weld-ability.  The low levels of carbon also act to reduce the generation of \gls{intergrancor} caused by welding, over the life of the component \cite{asme-eng}.  Tables of the composition of 304 and pertinent mechanical properties are included in \ref{app:304}. The outer tank of the fermenter will not come into contact with the brewing ingredients, and as such, other materials separate from stainless steel may be used.  Aluminium was chosen to be the material for the outer tank due to its low mass and financial cost.
 
 \subsubsection{Tank Structure}
@@ -542,7 +542,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent For the \gls{pid} system, the ``critical k-value", defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
+\noindent For the \gls{pid} system, the ``critical k-value'', defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
 
 \begin{figure}[H]
 \begin{center}
@@ -759,7 +759,7 @@ An important component of the web server is the server to client communication. 
 }
 \end{lstlisting}
 
-The ``to" value holds the unique application id and the data block holds the key value pairs that are encapsulated in the message.
+The ``to'' value holds the unique application id and the data block holds the key value pairs that are encapsulated in the message.
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
 \subsubsection{Sparging Algorithms}
@@ -887,7 +887,7 @@ public static void gcmSendMessage(String message) {
 
 \noindent This satisfies the functional requirement ``Application Notification'' seen in the Functional Specification section \ref{FS}, where the system can provide notifications to the user simply by calling the \gls{url} with the message that it wants the user to receive.
 
-\noindent The \textit{BrewLogResource}  is implemented to fulfil the "Database" requirement as seen in Functional Specification section \ref{FS}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
+\noindent The \textit{BrewLogResource}  is implemented to fulfil the ``Database'' requirement as seen in Functional Specification section \ref{FS}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
  
 \begin{lstlisting}
 @Path("brewlog")
@@ -1022,7 +1022,7 @@ The second component of the application is to allow the user to control the brew
 \end{center}
 \end{figure}
 
-\noindent MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls" option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. 
+\noindent MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls'' option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. 
 
 \noindent InputActivity: The InputActivity allows the user to select a previous brew process to modify or create a brand new brew process. The user can change various states such as max temperature for boils, number of hours and other conditions that might affect the brew. The user is also able to start the brew from the interface, by tapping the START button snapped to the bottom of the interface.
 
