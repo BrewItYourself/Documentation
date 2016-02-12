@@ -729,36 +729,7 @@ For message passing, this application uses the data message type. This is becaus
 \cite{sparging}.
 
 \subsubsection{\gls{rest} Web Server}
-The \gls{rest} Web Server is implemented using the Jersey Framework
-
-\begin{lstlisting}
-public class MainApplication extends ResourceConfig {
-    private static final URI BASE_URI = URI.create(Constants.SERVER_URL);
-
-    public MainApplication() {
-        packages("com.brewityourself.server.container");
-        register(BrewLogResource.class);
-        register(GCMNotificationResource.class);
-        register(JacksonJsonProvider.class);
-        register(JacksonFeature.class);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("BrewItYourSelf RESTful Web Server");
-
-        MainApplication mainApplication = new MainApplication();
-        final HttpServer server = JdkHttpServerFactory.createHttpServer(BASE_URI, mainApplication, false);
-        HttpHandler handler = RuntimeDelegate.getInstance().createEndpoint(mainApplication, HttpHandler.class);
-
-        server.createContext(getBaseURI().getPath(), handler);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            server.stop(0);
-        }));
-
-        server.start();
-    }
-}
-\end{lstlisting}
+The \gls{rest} Web Server is implemented using the Jersey Framework 
 
 \begin{lstlisting}
 @Path("gcm_notification")
@@ -766,20 +737,16 @@ public class GCMNotificationResource {
 
     GCMSender gcmSender;
 
-    public GCMNotificationResource() {
-        gcmSender = new GCMSender();
-    }
-
     @GET
-    @Path("/test")
+    @Path("/send")
     public Response sendSimpleMessage(String message) {
-
         GCMSender.gcmSendMessage(message);
 
         return Response.ok().build();
     }
 }
 \end{lstlisting}
+
 \begin{lstlisting}
 public static void gcmSendMessage(String to, String message) {
     try {
@@ -808,20 +775,43 @@ public static void gcmSendMessage(String to, String message) {
         OutputStream outputStream = conn.getOutputStream();
         outputStream.write(jGcmData.toString().getBytes());
 
-        // Read GCM response.
-        InputStream inputStream = conn.getInputStream();
-        String resp = IOUtils.toString(inputStream);
-        System.out.println(resp);
-        System.out.println("Sent to Device");
     } catch (IOException e) {
         e.printStackTrace();
     }
 }
 \end{lstlisting}
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google. 
-\subsubsection{\gls{gcm} Server}
 
+\begin{lstlisting}
+@Path("brewlog")
+public class BrewLogResource {
 
+    private BrewLogService brewLogService;
+    
+    @GET
+    @Path("/{brewid}")
+    @Produces("application/json")
+    public Response getBrewLogs(@PathParam("brewid") int brewid) {
+        System.out.println("brewid: " + brewid);
+        List<BrewLog> brewLogs = brewLogService.getBrewLogs(brewid);
+
+        if (brewLogs.size() > 0) {
+            return Response.ok().type(MediaType.APPLICATION_JSON_TYPE).entity(brewLogs).build();
+        } else {
+            return Response.noContent().build();
+        }
+    }
+
+    @PUT
+    @Path("brew_data/")
+    @Consumes("application/json")
+    public Response putBrewData(BrewLog brewLog) {
+        brewLogService.putBrewLog(brewLog);
+
+        return Response.accepted().type(MediaType.APPLICATION_JSON_TYPE).build();
+    }
+}
+\end{lstlisting}
 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
