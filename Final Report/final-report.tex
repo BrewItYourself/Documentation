@@ -49,12 +49,12 @@
 \newglossaryentry{grain-bill}{type=beer,name=Grain Bill, text=grain bill, description=The required amount of grains for the \gls{mash} in order to reach the desired \gls{gravity} necessary for the \gls{wort}.}
 \newglossaryentry{gravity}{type=beer,name=Gravity, text=gravity, description=The density of the \gls{wort}.  This is often assumed to be the sugar density of the \gls{wort}.  The term \ensuremath{OG} refers to the original gravity of the \gls{wort}.  \ensuremath{SG} refers to the current specific gravity of the \gls{wort}.  \ensuremath{FG} refers to the final gravity upon the completion of fermentation.  The difference between the \ensuremath{FG} and \ensuremath{OG} is often used to calculate the percentage of alcohol in the final product.}
 \newglossaryentry{grist}{type=beer, name=Grist, text=grist, description=The combination of milled grains to be used in a particular brew. Also sometimes applied to hops \cite{beer-terms}.}
-\newglossaryentry{lauter}{type=beer, name=Lauter, text=lauter, description=To run the wort from the mash tun.  From the German word to clarify.  It uses a system of sharp rakes to achieve a very intensive extraction of malt sugars. \cite{beer-terms}.}
+\newglossaryentry{lauter}{type=beer, name=Lauter, text=lauter, description=To run the \gls{wort} from the \gls{mash} tun.  From the German word to clarify.  It uses a system of sharp rakes to achieve a very intensive extraction of malt sugars. \cite{beer-terms}.}
 \newglossaryentry{mash}{type=beer, name=Mash, text=mash, description=(Verb) To release malt sugars by soaking the grains in water. (Noun) The resultant mixture \cite{beer-terms}.}
 \newglossaryentry{pitch}{type=beer, name=Pitch, text=pitch, description=To add yeast.}
-\newglossaryentry{sparge}{type=beer, name=Sparge, text=sparge, description=To spray grist with hot water in order to remove soluble sugars (maltose). This takes place at the end of the mash \cite{beer-terms}.}
+\newglossaryentry{sparge}{type=beer, name=Sparge, text=sparge, description=To spray \gls{grist} with hot water in order to remove soluble sugars (maltose). This takes place at the end of the mash \cite{beer-terms}.}
 \newglossaryentry{trub}{type=beer, name=Trub, text=trub, description=The layer of sediment that appears at the bottom of the fermentation vessel upon the completion of fermentation.}
-\newglossaryentry{wort}{type=beer,name=Wort, text=wort, description=The solution of grain sugars strained from the mash tun \cite{beer-terms}.}
+\newglossaryentry{wort}{type=beer,name=Wort, text=wort, description=The solution of grain sugars strained from the \gls{mash} tun \cite{beer-terms}.}
 
 \newglossaryentry{rpi}{type=technical, name=Raspberry Pi 2 Model B, text=Raspberry Pi, description=The Raspberry Pi 2 Model B is the second generation Raspberry Pi. It replaced the original Raspberry Pi 1 Model B+ in February 2015.}
 \newglossaryentry{ass}{type=technical, name=Austenitic Stainless Steel, description=An alloy family of stainless steels high in \gls{austenite} phase grain structure.}
@@ -257,7 +257,7 @@ Heating Unit
 \begin{tabularx}{\textwidth}{l l Z}
 Cooling Unit
 & Essential
-& Yeast pitching and fermentation happen immediately after boiling the wort, but require temperatures a specific temperature (typically 20$^{\circ}$C). The system is able to rapidly cool the wort to a temperature within 3$^{\circ}$C of the target temperature so that the yeast may be pitched safely.
+& Yeast pitching and fermentation happen immediately after boiling the \gls{wort}, but require temperatures a specific temperature (typically 20$^{\circ}$C). The system is able to rapidly cool the \gls{wort} to a temperature within 3$^{\circ}$C of the target temperature so that the yeast may be pitched safely.
 \\\\
 Temperature Regulation
 & Essential
@@ -401,7 +401,7 @@ The main challenge following the the design and construction of the structure of
 \end{center}
 \end{figure}
 
-The first step in the process is the removal of the batch from the fermenting vessel. A large, two inch ball valve was selected to mitigate any potential blockage in the system which could be caused by the viscous and tacky mash.  After the batch ingredients pass through the valve, they enter into a chamber featuring a wire mesh basket held within the lower container, shown in Figure \ref{fig:filter-basket-render}.
+The first step in the process is the removal of the batch from the fermenting vessel. A large, two inch ball valve was selected to mitigate any potential blockage in the system which could be caused by the viscous and tacky \gls{mash}.  After the batch ingredients pass through the valve, they enter into a chamber featuring a wire mesh basket held within the lower container, shown in Figure \ref{fig:filter-basket-render}.
 
 \begin{figure}[H]
 \begin{center}
@@ -421,7 +421,7 @@ The secondary vessel features a removable, clamp-on door attached to the mesh ba
 \end{center}
 \end{figure}
 
-The chugger pump \cite{chugger} was chosen for its durability and resilience, specifically when moving large quantities of sugar rich wort.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
+The chugger pump \cite{chugger} was chosen for its durability and resilience, specifically when moving large quantities of sugar rich \gls{wort}.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
 
 In summary, the mechanical design and renderings contributed to the final mechanical prototype as shown in Figure \ref{fig:mechanical-prototype}.
 
@@ -774,9 +774,9 @@ The ``to" value holds the unique application id and the data block holds the key
 For message passing, this application uses the data message type. This is because notification messages does not offer custom key-value pairs that is required for transferring information from server to client. Although additional processing is done in the client side, data messages can be flexible to handle the various state changes that the system may undergo. In conclusion, the \gls{gcm} component of the web server uses the \gls{xmpp} protocol that sends data type messages to the client. 
 
 \subsubsection{Sparging Algorithms}
-The no-sparge technique uses approximately 25\% more grain than a standard recipe and allows for the sparging process to be bypassed with no ill effects to the brew.  As a result, this method produces a richer, smoother-tasting \gls{wort} with the same gravity as a standard recipe, but with a mash and optionally a \gls{lauter} process that makes the \gls{wort} more robust and pH stable.  Not only is the end result more desirable to the consumer, but having a pH stable \gls{wort} allows for a reduced risk of souring due to bacteria and diminishes the chances of abnormal deviations.  Ultimately, this process greatly reduces the complexity of the all grain brewing process as well as the overall complexity of the system.
+The no-\gls{sparge} technique uses approximately 25\% more grain than a standard recipe and allows for the sparging process to be bypassed with no ill effects to the brew.  As a result, this method produces a richer, smoother-tasting \gls{wort} with the same \gls{gravity} as a standard recipe, but with a \gls{mash} and optionally a \gls{lauter} process that makes the \gls{wort} more robust and pH stable.  Not only is the end result more desirable to the consumer, but having a pH stable \gls{wort} allows for a reduced risk of souring due to bacteria and diminishes the chances of abnormal deviations.  Ultimately, this process greatly reduces the complexity of the all grain brewing process as well as the overall complexity of the system.
 
-The following calculations combine the scaling-up of the \gls{grain-bill} with a three-step infusion-mash that makes the whole process more manageable \cite{sparging}.  Below is a list of the relevant symbols and terms used for input parameters, constants, and output parameters respectively.
+The following calculations combine the scaling-up of the \gls{grain-bill} with a three-step infusion-\gls{mash} that makes the whole process more manageable \cite{sparging}.  Below is a list of the relevant symbols and terms used for input parameters, constants, and output parameters respectively.
 
 \noindent \\The input parameters to the no \gls{sparge}: \\
 $OG$ is the standard recipe original \gls{gravity} \\
@@ -786,67 +786,67 @@ $V_{b}$ is the standard recipe boil volume in gallons \\
 
 \noindent Relevant constants to be considered: \\
 $k$ is the water retention coefficient (0.125 gal/lb) \\
-$R_{r}$ is the standard recipe conversion rest mash ratio (typically 1 qt/lb) \\
+$R_{r}$ is the standard recipe conversion rest \gls{mash} ratio (typically 1 qt/lb) \\
 
 \noindent The output parameters: \\
 $S$ is the scale-up factor for the \gls{grain-bill} \\
-$G_{n}$ is the no-sparge \gls{grain-bill} in pounds \\
-$BG$ is the no-sparge boil gravity \\
-$R_{n}$ is the no-sparge final mash ratio (qt/lb) \\
-$W_{n}$ is the no-sparge total water volume in quarts \\
-$W_{mo}$ is the mash-out water volume in quarts \\
-$V_{t}$ is the no-sparge total mash volume in quarts \\
+$G_{n}$ is the no-\gls{sparge} \gls{grain-bill} in pounds \\
+$BG$ is the no-\gls{sparge} boil \gls{gravity} \\
+$R_{n}$ is the no-\gls{sparge} final \gls{mash} ratio (qt/lb) \\
+$W_{n}$ is the no-\gls{sparge} total water volume in quarts \\
+$W_{mo}$ is the \gls{mash}-out water volume in quarts \\
+$V_{t}$ is the no-\gls{sparge} total \gls{mash} volume in quarts \\
 
-\noindent The scale up factor is calculated by using Equation \ref{eq:scale-up} and is used in determining the no-sparge \gls{grain-bill}.
+\noindent The scale up factor is calculated by using Equation \ref{eq:scale-up} and is used in determining the no-\gls{sparge} \gls{grain-bill}.
 
 \begin{equation}
 S = \frac{V_{b}}{(V_{b} - kG_{r})}
 \label{eq:scale-up}
 \end{equation}
 
-\noindent The no-sparge \gls{grain-bill} is calculated using Equation \ref{eq:grain-bill}.
+\noindent The no-\gls{sparge} \gls{grain-bill} is calculated using Equation \ref{eq:grain-bill}.
 
 \begin{equation}
 G_{n} = S \times G_{r}
 \label{eq:grain-bill}
 \end{equation}
 
-\noindent The no-sparge boil gravity is adjusted by using Equation \ref{eq:boil-gravity}.
+\noindent The no-\gls{sparge} boil \gls{gravity} is adjusted by using Equation \ref{eq:boil-gravity}.
 
 \begin{equation}
 BG = OG \times \frac{V_{r}}{V_{b}}
 \label{eq:boil-gravity}
 \end{equation}
 
-\noindent The total no-sparge water volume in quarts is determined by Equation \ref{eq:water-volume}.
+\noindent The total no-\gls{sparge} water volume in quarts is determined by Equation \ref{eq:water-volume}.
 
 \begin{equation}
 W_{n} = 4(V_{b} + kG_{n})
 \label{eq:water-volume}
 \end{equation}
 
-\noindent By using Equation \ref{eq:mash-ratio} the no-sparge mash ratio is calculated.
+\noindent By using Equation \ref{eq:mash-ratio} the no-\gls{sparge} \gls{mash} ratio is calculated.
 
 \begin{equation}
 R_{n} = \frac{W_{n}}{G_{n}}
 \label{eq:mash-ratio}
 \end{equation}
 
-\noindent The volume of water used for the mashout in quarts is determined by Equation \ref{eq:water-mashout}.
+\noindent The volume of water used for the \gls{mash}-out in quarts is determined by Equation \ref{eq:water-mashout}.
 
 \begin{equation}
 W_{mo} = G_{n}(R_{n} - R_{r})
 \label{eq:water-mashout}
 \end{equation}
 
-\noindent Finally, the total no-sparge mash volume in quarts is calculated using Equation \ref{eq:mash-volume}.  The volume of 1 pound of dry grain, mashed at 1 quart per pound, has a volume of 42 fluid ounces or 1.3125 quarts. Higher ratios only add the additional water volume, but can be used for different styles of recipes.
+\noindent Finally, the total no-\gls{sparge} \gls{mash} volume in quarts is calculated using Equation \ref{eq:mash-volume}.  The volume of 1 pound of dry grain, mashed at 1 quart per pound, has a volume of 42 fluid ounces or 1.3125 quarts. Higher ratios only add the additional water volume, but can be used for different styles of recipes.
 
 \begin{equation}
 V_{t} = G_{n}(1.3125 + (R_{n} - 1)
 \label{eq:mash-volume}
 \end{equation}
 
-By using the methods listed above, the no-sparge process is successfully implemented while maintaining compatibility with standard recipes and the all grain brewing process.
+By using the methods listed above, the no-\gls{sparge} process is successfully implemented while maintaining compatibility with standard recipes and the all grain brewing process.
 
 \subsubsection{\gls{rest} Web Server}
 The \gls{rest}ful Web Server is implemented using the \gls{jersey}. The \gls{jersey} provides various \gls{api}s and services to streamline web server development. Services such as \gls{json} parsing and formatting, error logging and \gls{uri} mappings are all handled by this framework. There are two main functionalities that is implemented in the web server; the \textit{GCMNotificationResource} and the \textit{BrewLogResource}. Each functionality is mapped to a \gls{uri} endpoint called a \gls{resource}. A sample of the \textit{GCMNotificationResource} is shown in the code sample below. The following code samples are all written in Java.
