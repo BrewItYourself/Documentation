@@ -323,7 +323,7 @@ The mechanical design component of this project is comprised of two aspects: the
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{fermenter-wall-cad.png}
+\includegraphics[scale=0.25]{fermenter-wall-cad.png}
 \caption{Illustration of the double wall design for the fermenter}
 \label{fig:fermenter-wall-cad}
 \end{center}
@@ -359,7 +359,7 @@ The outer tank thickness can now be specified using the mass of the inner tank a
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{fermenter-cad.png}
+\includegraphics[scale=0.25]{fermenter-cad.png}
 \caption{Illustration of the double wall design for the fermenter}
 \label{fig:fermenter-cad}
 \end{center}
@@ -386,8 +386,40 @@ t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma
 \end{equation}
 The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125in. was selected to meet the requirements for the outer tank.
 
-\subsubsection{Prototype Data}
-Section to add prototype data to mechanical section
+\subsubsection{Integration of Waste Removal System}
+The main challenge following the the design and construction of the structure of the fermenter is the separation of desired brewing products from spent ingredients.  The full rendering below, Figure \ref{fig:full-vessel-render} shows the full fluid circuit.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{full-vessel-render.png}
+\caption{Full Vessel Render}
+\label{fig:full-vessel-render}
+\end{center}
+\end{figure}
+
+The first step in the process is the removal of the batch from the fermenting vessel. A large, two inch ball valve was selected to mitigate any potential blockage in the system which could be caused by the viscous and tacky mash.  After the batch ingredients pass through the valve, they enter into a chamber featuring a wire mesh basket held within the lower container, shown in Figure \ref{fig:filter-basket-render}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{filter-basket-render.png}
+\caption{Filter Basket Render}
+\label{fig:filter-basket-render}
+\end{center}
+\end{figure}
+
+The secondary vessel features a removable, clamp-on door attached to the mesh basket.  This aids with cleanup and preparation for the subsequent brew.  Leftover ingredients and \gls{trub} can be contained in this vessel during the brewing process until the user is ready to remove any waste. A “Chugger Pump” is then used to replace the remaining brew into the primary vessel to proceed with fermentation process.  A rendering of the fitment of the pump is shown below in Figure \ref{fig:chugger-pump}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=1]{chugger-pump.png}
+\caption{Chugger Pump}
+\label{fig:chugger-pump}
+\end{center}
+\end{figure}
+
+The chugger was chosen for its durability and resilience, specifically when moving large quantities of sugar rich wort.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
+
+In summary, the mechanical design and renderings contributed to the final mechanical prototype as shown in Figure \ref{fig:mechanical-prototype}.
 
 \begin{figure}[H]
 \begin{center}
@@ -396,40 +428,6 @@ Section to add prototype data to mechanical section
 \label{fig:mechanical-prototype}
 \end{center}
 \end{figure}
-
-\subsubsection{Integration of Waste Removal System}
-The main challenge following the the design and construction of the structure of the fermenter is the separation of desired brewing products from spent ingredients.  The full rendering below, figure \ref{fig:full-vessel-render} shows the full fluid circuit.
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.80]{full-vessel-render.png}
-\caption{Full Vessel Render}
-\label{fig:full-vessel-render}
-\end{center}
-\end{figure}
-
-The first step in the process is the removal of the batch from the fermenting vessel. A large, two inch ball valve was selected to mitigate any potential blockage in the system which could be caused by the viscous and tacky mash.  After the batch ingredients pass through the valve, they enter into a chamber featuring a wire mesh basket held within the lower container, shown in figure \ref{fig:filter-basket-render}.
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.80]{filter-basket-render.png}
-\caption{Filter Basket Render}
-\label{fig:filter-basket-render}
-\end{center}
-\end{figure}
-
-The secondary vessel features a removable, clamp-on door attached to the mesh basket.  This aids with cleanup and preparation for the subsequent brew.  Leftover ingredients and \gls{trub} can be contained in this vessel during the brewing process until the user is ready to remove any waste. A “Chugger Pump” is then used to replace the remaining brew into the primary vessel to proceed with fermentation process.  A rendering of the fitment of the pump is shown below in figure \ref{fig:chugger-pump}.
-
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.80]{chugger-pump.png}
-\caption{Chugger Pump}
-\label{fig:chugger-pump}
-\end{center}
-\end{figure}
-
-The chugger was chosen for its durability and resilience, specifically when moving large quantities of sugar rich wort.  The integration of these components allows for the completion of an all-grain brew, an increasingly popular method used by contemporary home brewers.
-
 
 \subsection{Electrical System}
 The electrical system consists of two main parts, the controller and the power electronic circuitry. These two subsystems are coupled closely together in that the control signals produced by the controller are amplified by the power electronics and sent to each plant. The main plants that are controlled and powered by the electrical systems are the heating element, cooling system, mixing motor, and various small similar actuators.
@@ -454,7 +452,7 @@ Qh = Qs + Ql
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{heat-system-diagram.png}
+\includegraphics[scale=0.50]{heat-system-diagram.png}
 \caption{A heat system diagram for a closed volume of liquid}
 \label{fig:heat-system-diagram}
 \end{center}
@@ -491,7 +489,7 @@ The controller used to control the temperature of the volume of water can be imp
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{hysteresis-block-diagram.png}
+\includegraphics[scale=0.70]{hysteresis-block-diagram.png}
 \caption{Hysterisis loop temperature controller and plant model}
 \label{fig:hysteresis-block-diagram}
 \end{center}
@@ -499,7 +497,7 @@ The controller used to control the temperature of the volume of water can be imp
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{pid-block-diagram.png}
+\includegraphics[scale=0.70]{pid-block-diagram.png}
 \caption{\gls{pid} temperature controller and plant model}
 \label{fig:pid-block-diagram}
 \end{center}
@@ -507,7 +505,7 @@ The controller used to control the temperature of the volume of water can be imp
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{pid-parameters.png}
+\includegraphics[scale=0.80]{pid-parameters.png}
 \caption{\gls{pid} controller parameters}
 \label{fig:pid-parameters}
 \end{center}
@@ -517,7 +515,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{hysteresis-step-lossless.png}
+\includegraphics[scale=0.35]{hysteresis-step-lossless.png}
 \caption{Lossless hysteresis loop control step response with control signal}
 \label{fig:hysteresis-step-lossless}
 \end{center}
@@ -525,7 +523,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{pid-step-lossless.png}
+\includegraphics[scale=0.35]{pid-step-lossless.png}
 \caption{Lossless \gls{pid} control step response with control signal}
 \label{fig:pid-step-lossless}
 \end{center}
@@ -535,7 +533,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{hysteresis-step-lossy.png}
+\includegraphics[scale=0.35]{hysteresis-step-lossy.png}
 \caption{Lossy hysteresis loop step response with control signal}
 \label{fig:hysteresis-step-lossy}
 \end{center}
@@ -545,7 +543,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{pid-steps-various-k.png}
+\includegraphics[scale=0.35]{pid-steps-various-k.png}
 \caption{PID controller step response for various thermal conductivities}
 \label{fig:pid-steps-various-k}
 \end{center}
@@ -555,7 +553,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.30]{hysteresis-step-critical.png}
+\includegraphics[scale=0.35]{hysteresis-step-critical.png}
 \caption{Critically lossy hysteresis loop step response with control signal}
 \label{fig:hysteresis-step-critical}
 \end{center}
@@ -568,7 +566,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{servo-large-actuator-circuit.png}
+\includegraphics[scale=0.40]{servo-large-actuator-circuit.png}
 \caption{Large Servo Motor Power Circuit}
 \label{fig:servo-large-actuator-circuit}
 \end{center}
@@ -578,7 +576,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{servo-small-actuator-circuit.png}
+\includegraphics[scale=0.30]{servo-small-actuator-circuit.png}
 \caption{Small Servo Motor Power Circuit}
 \label{fig:servo-small-actuator-circuit}
 \end{center}
@@ -590,7 +588,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{heater-hysteresis-circuit.png}
+\includegraphics[scale=0.40]{heater-hysteresis-circuit.png}
 \caption{Hysteresis Loop Controller Power Circuit}
 \label{fig:heater-hysteresis-circuit}
 \end{center}
@@ -598,19 +596,19 @@ The purpose behind the design of the power electronic circuitry is to be able to
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{heater-pid-circuit.png}
+\includegraphics[scale=0.30]{heater-pid-circuit.png}
 \caption{\gls{pid} Controller Power Circuit}
 \label{fig:heater-pid-circuit}
 \end{center}
 \end{figure}
 
-\noindent The pumping system is driven by a DC motor, and the circuit used to power it is pictured in figure \ref{fig:motor-thyristor-dc-circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
+\noindent The pumping system is driven by a DC motor, and the circuit used to power it is pictured in Figure \ref{fig:motor-thyristor-dc-circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
 
 \noindent The original design called for an additional large DC motor to power a mechanical mixer that would be submersed in the vessel, however it was decided that the turbulence generated from boiling would suffice to aid in the extraction of sugars from the grain.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.20]{motor-thyristor-dc-circuit.png}
+\includegraphics[scale=0.40]{motor-thyristor-dc-circuit.png}
 \caption{Thyristor Bridge Motor Power Circuit}
 \label{fig:motor-thyristor-dc-circuit}
 \end{center}
@@ -731,7 +729,7 @@ The two fundamental controllers that require communications for the operation of
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{water-controller-state-diagram.png}
+\includegraphics[scale=0.70]{water-controller-state-diagram.png}
 \caption{State diagram for the water controller component}
 \label{fig:water-controller}
 \end{center}
@@ -750,7 +748,7 @@ A \gls{lamp} server is the current solution for delivering information from the 
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{database-uml-diagram.png}
+\includegraphics[scale=0.60]{database-uml-diagram.png}
 \caption{A UML diagram showing the relation between tables and their entries in the logging database}
 \label{fig:database-diagram}
 \end{center}
@@ -986,7 +984,7 @@ This component of the application provides data from the brew system to the user
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{gcm-push-notification.png}
+\includegraphics[scale=0.60]{gcm-push-notification.png}
 \caption{Flow Design for Notification Service}
 \label{fig:gcm-push-notification}
 \end{center}
@@ -1001,7 +999,7 @@ The next part of the component displays previous data statistics recorded by the
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{data-statistics.png}
+\includegraphics[scale=0.70]{data-statistics.png}
 \caption{Flow Design for Data Statistics}
 \label{fig:data-statistics}
 \end{center}
@@ -1018,7 +1016,7 @@ The second component of the application is to allow the user to control the brew
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.50]{input-activity.png}
+\includegraphics[scale=0.70]{input-activity.png}
 \caption{Flow Design for User Input Activity}
 \label{fig:input-activity}
 \end{center}
@@ -1127,9 +1125,6 @@ This section contains important lookup values for mechanical and materials calcu
 \end{tabularx}
 \label{tab:}
 \end{table}
-
-\pagebreak
-\section{Parts List}\label{app:parts-list}
 
 \end{appendices}
 \end{document}
