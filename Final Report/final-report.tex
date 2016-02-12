@@ -59,6 +59,8 @@
 \newglossaryentry{intergrancor}{type=technical, name=Inter-granular Corrosion, description=Corrosion caused by varying composition between the grains and grain boundaries within a metal.  Welding 304 stainless steel may lead to intergranular corrosion if not cooled properly.}
 \newglossaryentry{ultenstr}{type=technical, name=Ultimate Tensile Strength, description=The maximum tensile stress a material can experience before breaking or fracturing}
 \newglossaryentry{yieldstr}{type=technical, name=Yield Stress, description=The stress at which a material begins to plastically deform.}
+\newglossaryentry{jersey}{type=technical, name=Jersey Framework, description=An \gls{rest} API Framework written in the Java coding language.}
+
 
 %\newacronym{abv}{ABV}{Alcohol By Volume}
 \newacronym{aisi}{AISI}{American Iron and Steel Institute}
@@ -724,9 +726,65 @@ For message passing, this application uses the data message type. This is becaus
 
 \subsubsection{Prototype Algorithms}
 
+\subsubsection{\gls{rest} Web Server}
+The \gls{rest} Web Server is implemented using the Jersey Framework
+
+\begin{lstlisting}
+public class MainApplication extends ResourceConfig {
+    private static final URI BASE_URI = URI.create(Constants.SERVER_URL);
+
+    public MainApplication() {
+        packages("com.brewityourself.server.container");
+        register(BrewLogResource.class);
+        register(GCMNotificationResource.class);
+        register(JacksonJsonProvider.class);
+        register(JacksonFeature.class);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("BrewItYourSelf RESTful Web Server");
+
+        MainApplication mainApplication = new MainApplication();
+        final HttpServer server = JdkHttpServerFactory.createHttpServer(BASE_URI, mainApplication, false);
+        HttpHandler handler = RuntimeDelegate.getInstance().createEndpoint(mainApplication, HttpHandler.class);
+
+        server.createContext(getBaseURI().getPath(), handler);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            server.stop(0);
+        }));
+
+        server.start();
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+@Path("gcm_notification")
+public class GCMNotificationResource {
+
+    GCMSender gcmSender;
+
+    public GCMNotificationResource() {
+        gcmSender = new GCMSender();
+    }
+
+    @GET
+    @Path("/test")
+    public Response sendSimpleMessage(String message) {
+
+        GCMSender.gcmSendMessage(message);
+
+        return Response.ok().build();
+    }
+}
+\end{lstlisting}
+\begin{lstlisting}
+
+\end{lstlisting}
+
 \subsubsection{\gls{gcm} Server}
 
-\subsubsection{\gls{rest} API}
+
 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
@@ -734,7 +792,7 @@ The mobile application subsystem provides an interface to the user and consists 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
+\noindent{The} mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
 Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table [criterion table] below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
 
 \begin{table}[H]
@@ -833,8 +891,7 @@ The novelty of our design is that it involves so many components from various En
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
 \subsection{Student Workload}
-The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables. Table \ref{tab:hours} indicates the total amount of hours each group member has worked on the project.
-
+The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables.
 
 \pagebreak
 \printglossary[type=acronym]
