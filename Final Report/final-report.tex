@@ -84,8 +84,9 @@
 \newacronym{rest}{REST}{RESTful}
 \newacronym{risc}{RISC}{Reduced Instruction Set Computing}
 \newacronym{ros}{ROS}{Robot Operating System}
+\newacronym{sdk}{SDK}{Software Development Kit}
 \newacronym{usb}{USB}{Universal Serial Bus}
-\newacronym{url}{URL}{Uniform Resource Identifier}
+\newacronym{uri}{URI}{Uniform Resource Identifier}
 \newacronym{uts}{UTS}{\gls{ultenstr}}
 \newacronym{wlan}{WLAN}{Wireless Local Area Network}
 \newacronym{xmpp}{XMPP}{Extensible Messaging and Presence Protocol}
@@ -848,7 +849,7 @@ V_{t} = G_{n}(1.3125 + (R_{n} - 1)
 By using the methods listed above, the no-sparge process is successfully implemented while maintaining compatibility with standard recipes and the all grain brewing process.
 
 \subsubsection{\gls{rest} Web Server}
-The \gls{rest}ful Web Server is implemented using the \gls{jersey}. The \gls{jersey} provides various \gls{api}s and services to streamline web server development. Services such as \gls{json} parsing and formatting, error logging and URL mappings are all handled by this framework. There are two main functionalities that is implemented in the web server; the \textit{GCMNotificationResource} and the \textit{BrewLogResource}. Each functionality is mapped to a \gls{url} endpoint called a \gls{resource}. A sample of the \textit{GCMNotificationResource} is shown in the code sample below. The following code samples are all written in Java.
+The \gls{rest}ful Web Server is implemented using the \gls{jersey}. The \gls{jersey} provides various \gls{api}s and services to streamline web server development. Services such as \gls{json} parsing and formatting, error logging and \gls{uri} mappings are all handled by this framework. There are two main functionalities that is implemented in the web server; the \textit{GCMNotificationResource} and the \textit{BrewLogResource}. Each functionality is mapped to a \gls{uri} endpoint called a \gls{resource}. A sample of the \textit{GCMNotificationResource} is shown in the code sample below. The following code samples are all written in Java.
 
 \begin{lstlisting}
 @Path("gcm_notification")
@@ -895,7 +896,7 @@ public static void gcmSendMessage(String message) {
 \end{lstlisting}
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
-\noindent This satisfies the functional requirement "Application Notification" seen in the Functional Specification section \ref{FS}, where the system can provide notifications to the user simply by calling the URL with the message that it wants the user to receive.
+\noindent This satisfies the functional requirement "Application Notification" seen in the Functional Specification section \ref{FS}, where the system can provide notifications to the user simply by calling the \gls{uri} with the message that it wants the user to receive.
 
 \noindent The \textit{BrewLogResource}  is implemented to fulfil the "Database" requirement as seen in Functional Specification section \ref{FS}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
  
@@ -928,15 +929,14 @@ public class BrewLogResource {
 }
 \end{lstlisting}
 
-This resource allows both reads and writes to the database. This gives the functionality of storing various data involved in brewing through write operations and querying the database through read operations. 
+\noindent This resource allows both reads and writes to the database. This gives the functionality of storing various data involved in brewing through write operations and querying the database through read operations. 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
 The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\noindent The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
-Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table \ref{tab:criterion-table} below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
+\noindent Platforms considered to develop the mobile application includes the Native Android platform, the \gls{ios} platform and the \gls{html5} web platform. Table \ref{tab:criterion-table} below shows the criterion used to choose the appropriate platform. \gls{gcm} support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the \gls{gcm} service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
 
 \begin{table}[H]
 \centering
@@ -953,10 +953,14 @@ Weight:   & 40\%        & 25\%           & 10\%          & 15\%  \\
 
 
 Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
-GCM Support: Both Android and iOS platforms have GCM client Application Program Interface (API)s developed by Google, and there are detailed steps in how to create a GCM client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
-Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various Software Development Kit (SDK)s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
-Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
-Resources: Developing the application for Android can be done using the Android Studio \gls{ide} and can be done on various computers \cite{astudio}. There are no specific \glspl{ide} to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
+
+\noindent \gls{gcm} Support: Both Android and iOS platforms have \gls{gcm} client \gls{api}s developed by Google, and there are detailed steps in how to create a \gls{gcm} client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
+
+\noindent Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various \gls{sdk}s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
+
+\noindent Accessibility: The most accessible application to develop would be the \gls{html5} application. This is because all mobile devices can use \gls{html5} applications through a web browser. However, both Android and \gls{ios} have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run \gls{ios} \cite{market}. Therefore a score of 10 for \gls{html5}, a score of 8 for android and a score of 1.6 for \gls{ios} is given based on how many percentage of smartphone users can be reached.
+
+\noindent Resources: Developing the application for Android can be done using the Android Studio \gls{ide} and can be done on various computers \cite{astudio}. There are no specific \glspl{ide} to develop for the \gls{html5} platform, but web applications can be developed using any text editor. However, developing \gls{ios} applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, \gls{ios} and \gls{html5} respectively.
 
 \begin{table}[H]
 \centering
@@ -973,7 +977,7 @@ HTML Web App   & 5           & 4              & 10            & 6        & 4.9  
 \end{tabular}
 \end{table}
 
-The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the GCM client side of the system to communicate with the GCM Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
+\noindent The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the GCM client side of the system to communicate with the GCM Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -988,12 +992,17 @@ This component of the application provides data from the brew system to the user
 \end{center}
 \end{figure}
 
-MainActivity: This activity starts on application launch (when user taps on the app icon). The activity will start the PushNotificationListenerService to run in the background.
-PushNotificationListenerService: The Listener uses the GCMReceiver class to listen for and to receive the data messages from the server. Whenever a \gls{json} message arrives to the client side, the onMessageReceived function is called to parse the \gls{json} message.
-onMessageReceived: This function parses the JSON message received by the Listener and creates a type of BrewNotification to display to the user.
-BrewNotification: This object will encapsulate notification created for the end user. Types of BrewNotification are based on priority: max, medium and low. Max priority notification is given to messages that relay critical information about the brew system (overheat, pressure build up, etc). Medium priority notifications are created for important messages (brew changing state, brew completed). Low priority notifications are given to messages that contain messages which the user does not necessarily have to know (boil temperature reached).
-To summarize, once the server sends a message to the client application,  the Listener service will process the message through the onMessageReceived function. Once the function parses which type of message it is, it displays the appropriate BrewNotification to the user.
-The next part of the component displays previous data statistics recorded by the sensors on previous brews. The data displayed includes temperature readings, volume, sugar concentration and other sensor measurement. This gives the user the ability to look at past brews and possibly make adjustments. Figure \ref{fig:data-statistics} illustrates the application flow for the data statistics.
+\noindent MainActivity: This activity starts on application launch (when user taps on the app icon). The activity will start the PushNotificationListenerService to run in the background.
+
+\noindent PushNotificationListenerService: The Listener uses the GCMReceiver class to listen for and to receive the data messages from the server. Whenever a \gls{json} message arrives to the client side, the onMessageReceived function is called to parse the \gls{json} message.
+
+\noindent onMessageReceived: This function parses the JSON message received by the Listener and creates a type of BrewNotification to display to the user.
+
+\noindent BrewNotification: This object will encapsulate notification created for the end user. Types of BrewNotification are based on priority: max, medium and low. Max priority notification is given to messages that relay critical information about the brew system (overheat, pressure build up, etc). Medium priority notifications are created for important messages (brew changing state, brew completed). Low priority notifications are given to messages that contain messages which the user does not necessarily have to know (boil temperature reached).
+
+\noindent To summarize, once the server sends a message to the client application,  the Listener service will process the message through the onMessageReceived function. Once the function parses which type of message it is, it displays the appropriate BrewNotification to the user.
+
+\noindent The next part of the component displays previous data statistics recorded by the sensors on previous brews. The data displayed includes temperature readings, volume, sugar concentration and other sensor measurement. This gives the user the ability to look at past brews and possibly make adjustments. Figure \ref{fig:data-statistics} illustrates the application flow for the data statistics.
 
 \begin{figure}[H]
 \begin{center}
@@ -1003,11 +1012,14 @@ The next part of the component displays previous data statistics recorded by the
 \end{center}
 \end{figure}
 
-MainActivity: The main activity (same from the previous component) allows the user to launch the activity to select previous brews.
-SelectorActivity: This activity contains a selectable list of all previously done brews. By selecting one item launches the DataViewActivity based on the brew.
-DataViewActivity: Displays various data (temperature, pressure, yield percentage) of the brew selected by the user.
+\noindent MainActivity: The main activity (same from the previous component) allows the user to launch the activity to select previous brews.
+
+\noindent SelectorActivity: This activity contains a selectable list of all previously done brews. By selecting one item launches the DataViewActivity based on the brew.
+
+\noindent DataViewActivity: Displays various data (temperature, pressure, yield percentage) of the brew selected by the user.
 Providing this information allows the user to view and experiment with previous brews to enhance the quality of future brews. 
-In conclusion, the real time data component of the application is designed to keep the user notified about the brew system, whether that would be about the current state of the brew process or about previous brew data. This enhances user experience such that the user does not have to constantly check the brew process to receive information since the system informs the user.
+
+\noindent In conclusion, the real time data component of the application is designed to keep the user notified about the brew system, whether that would be about the current state of the brew process or about previous brew data. This enhances user experience such that the user does not have to constantly check the brew process to receive information since the system informs the user.
 
 \subsubsection{Input Controls and Interaction}
 The second component of the application is to allow the user to control the brew system with the mobile application. The goals of this component is to allow the user to start the brew process through the application and to provide control over various conditions within the brew process such as the maximum temperature, the target sugar concentration and others that would affect the brew's quality. Figure \ref{fig:input-activity} below shows the design flow for this component.
@@ -1020,10 +1032,13 @@ The second component of the application is to allow the user to control the brew
 \end{center}
 \end{figure}
 
-MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls" option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. 
-InputActivity: The InputActivity allows the user to select a previous brew process to modify or create a brand new brew process. The user can change various states such as max temperature for boils, number of hours and other conditions that might affect the brew. The user is also able to start the brew from the interface, by tapping the START button snapped to the bottom of the interface.
-SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
-If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
+\noindent MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls" option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. 
+
+\noindent InputActivity: The InputActivity allows the user to select a previous brew process to modify or create a brand new brew process. The user can change various states such as max temperature for boils, number of hours and other conditions that might affect the brew. The user is also able to start the brew from the interface, by tapping the START button snapped to the bottom of the interface.
+
+\noindent SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
+
+\noindent If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
@@ -1037,8 +1052,9 @@ The novelty of our design is that it involves so many components from various En
 \subsubsection{Assessed Risks}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
+\pagebreak
 \subsection{Student Workload}
-Table shows the amount of work contributed by each group member.
+Table below shows the amount of work contributed by each group member.
 \begin{table}[H]
 \centering
 \caption{Project Contributions}
