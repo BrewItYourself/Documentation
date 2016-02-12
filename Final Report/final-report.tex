@@ -780,7 +780,42 @@ public class GCMNotificationResource {
 }
 \end{lstlisting}
 \begin{lstlisting}
+public static void gcmSendMessage(String to, String message) {
+    try {
+        // Prepare JSON containing the GCM message content. What to send and where to send.
+        JSONObject jGcmData = new JSONObject();
+        JSONObject jData = new JSONObject();
+        jData.put("message", message);
+        // Where to send GCM message.
+        if (to != null) {
+            jGcmData.put("to", to.trim());
+        } else {
+            jGcmData.put("to", "/topics/global");
+        }
+        // What to send in GCM message.
+        jGcmData.put("data", jData);
 
+        // Create connection to send GCM Message request.
+        URL url = new URL(GCM_URL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Authorization", "key=" + API_KEY);
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestMethod("POST");
+        conn.setDoOutput(true);
+
+        // Send GCM message content.
+        OutputStream outputStream = conn.getOutputStream();
+        outputStream.write(jGcmData.toString().getBytes());
+
+        // Read GCM response.
+        InputStream inputStream = conn.getInputStream();
+        String resp = IOUtils.toString(inputStream);
+        System.out.println(resp);
+        System.out.println("Sent to Device");
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 \end{lstlisting}
 
 \subsubsection{\gls{gcm} Server}
