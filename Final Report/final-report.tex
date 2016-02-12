@@ -216,7 +216,7 @@ D: The software running on the microcontroller is being designed. This software 
 
 \section{Project Specifications}
 This section outlines the functional and non-functional requirements of the project design.
-\subsection{Functional Specifications}
+\subsection{Functional Specifications}\label{FS}
 Table \ref{tab:func} describes each functional requirement and highlights whether it is essential or not to the completion of the project.
 
 \newcolumntype{Z}{>{\raggedright\arraybackslash}X}
@@ -267,7 +267,7 @@ Application Notifications
 & Non-Essential
 & The system provides notifications to the user updating them on the current state or action being taken.  Additionally errors or warnings can be sent, in cases of emergency such as clogs, low oxygen or carbon dioxide, or an improper environment.
 \\\\
-Webserver \& Database
+Database
 & Essential
 & The system is able query the specific steps it needs to automate for a specific brew.  Additionally, it can store various data involved in brewing including temperature, pH levels and density measurements to generate logs and reports.
 \\\\
@@ -575,7 +575,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{figure}
 
 \subsubsection{Prototype Circuitry}
-Since the physical conical was only recently received from the machine shop due to welding requirements, a test board as shown in Figure \ref{fig:electrical-prototype} is necessary to simulate the process.  By powering loads, using a solid state relay paired with a microcontroller, a proper testing environment is achieved. The final step in the electrical design process is to install these components and their duplicates into a NEMA-rated electrical box, attach the motor controlled valves and sensors to the vessel, as well as connecting them with their respective wiring schematics.
+Since we only recently received our vessel back from the machine shop from welding, none of the test electronics have been installed. However, Figure \ref{fig:electrical-prototype} shows a test board where the relays have been tested by powering loads, controlled by the microcontroller on the far right. The next step is to install these components and their duplicates into a NEMA-rated electrical box, affix the actuatable components to the vessel, and run the wiring between everything.
 
 \begin{figure}[H]
 \begin{center}
@@ -805,7 +805,7 @@ V_{t} = G_{n}(1.3125 + (R_{n} - 1)
 By using the methods listed above, the no-sparge process is successfully implemented while maintaining compatibility with standard recipes and the all grain brewing process.
 
 \subsubsection{\gls{rest} Web Server}
-The \gls{rest} Web Server is implemented using the \gls{jersey}. Each functionality specified is mapped to a URL endpoint called a \gls{resource}. The Application Notification endpoint is mapped to a resource called  
+The \gls{rest}ful Web Server is implemented using the \gls{jersey}. Each functionality specified is mapped to a URL endpoint called a \gls{resource}. A sample of a resource is shown in the code sample below. The following code samples are all written in Java.
 
 \begin{lstlisting}
 @Path("gcm_notification")
@@ -823,19 +823,19 @@ public class GCMNotificationResource {
 }
 \end{lstlisting}
 
+\noindent The above resource is called whenever the system needs to notify the client. The resource calls the function \textit{gcmSendMessage} which sends the message to the \gls{gcm} server. The \gls{gcm} server is an external service that is used to push notifications to client applications. A sample code of the textit{gcmSendMessage} function is shown below where the message being sent to the client is put into a \gls{json} object to be passed to the \gls{gcm} server. 
+\linebreak
+\linebreak
 \begin{lstlisting}
-public static void gcmSendMessage(String to, String message) {
+public static void gcmSendMessage(String message) {
     try {
         // Prepare JSON containing the GCM message content. What to send and where to send.
         JSONObject jGcmData = new JSONObject();
         JSONObject jData = new JSONObject();
         jData.put("message", message);
         // Where to send GCM message.
-        if (to != null) {
-            jGcmData.put("to", to.trim());
-        } else {
-            jGcmData.put("to", "/topics/global");
-        }
+        jGcmData.put("to", "/topics/global");
+       
         // What to send in GCM message.
         jGcmData.put("data", jData);
 
@@ -856,8 +856,13 @@ public static void gcmSendMessage(String to, String message) {
     }
 }
 \end{lstlisting}
-Code above is based on GCMSender.java provided by Google \cite{gcm-sendnotification}.
+\cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
+\noindent This satisfies the functional requirement "Application Notification" seen in section \ref{FS}, where the system can provide notifications to the user simply by calling the URL with the message that it wants the user to receive.
+\linebreak
+\linebreak
+\noindent Another resource implemented with the \gls{rest} server is the \textit{BrewLogResource}. This \gls{resource} is created to satisfy the "Database" requirement as seen in section \ref{FS}. The resource provides a access point from the server to the database. A portion of the resource code is shown below:
+ 
 \begin{lstlisting}
 @Path("brewlog")
 public class BrewLogResource {
@@ -868,7 +873,6 @@ public class BrewLogResource {
     @Path("/{brewid}")
     @Produces("application/json")
     public Response getBrewLogs(@PathParam("brewid") int brewid) {
-        System.out.println("brewid: " + brewid);
         List<BrewLog> brewLogs = brewLogService.getBrewLogs(brewid);
 
         if (brewLogs.size() > 0) {
@@ -883,12 +887,12 @@ public class BrewLogResource {
     @Consumes("application/json")
     public Response putBrewData(BrewLog brewLog) {
         brewLogService.putBrewLog(brewLog);
-
         return Response.accepted().type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 }
 \end{lstlisting}
 
+This resource allows both reads and writes to the database. This gives the functionality of storing various data involved in brewing through write operations and querying the database through read operations. 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
 The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
@@ -979,24 +983,39 @@ InputActivity: The InputActivity allows the user to select a previous brew proce
 SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
 If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
-\subsubsection{\gls{gcm} Client}
-
-
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
-The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device.
+The final design meets the objective and specifications listed in the project specification document. The combination of the subsystems creates an automated brew system that can control the climate within the vessel.  These controls are brought about by the inclusion of a temperature regulation which requires real-time temperature feedback to maintain precision. The functional requirements "Database" and "Application Notification" is implemented through a \gls{rest}Ful web server with various resources. There is also an additional specification to create a user interface so that the brewing device may be operated via a mobile device. 
 \subsection{Use of Advanced Knowledge}
 The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE356 (Database Systems), ECE454 (Distributed Systems) and ECE452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE380 and ECE 481, and the design and analysis of the power electronic components uses concepts take directly from ECE463.
 \subsection{Creativity, Novelty, Elegance}
 The novelty of our design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
 
 \subsection{Quality of Risk Assessment}
+\subsubsection{Assessed Risks}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
 
+
+
 \subsection{Student Workload}
-The group focus for the past 2 months was on the initial phase of the project. This involves designing components, ordering parts and determining an appropriate timeline. All of the group members met once a week to discuss progress, plans and future deliverables.
+Table shows the amount of work contributed by each group member.
+\begin{table}[H]
+\centering
+\caption{Project Contributions}
+\label{workload-percentage}
+\begin{tabular}{ll}
+Group Member     				  & Percentage of Workload \\
+Kevin Nause (Embedded Computers)    &                        \\
+Mathieu Tremblay (Electrical)		  &                        \\
+Scott Wood     (Mechanical)		  &                        \\
+Steve Jung     (Mobile App)  		  &                       
+\end{tabular}
+\end{table}
+
+The workload was divided on the various skills of each group member. Each group member was assigned a major component of the project based on their skills. 
 
 \pagebreak
+
 \printglossary[type=acronym]
 \printglossary[type=beer]
 \printglossary[type=technical]
