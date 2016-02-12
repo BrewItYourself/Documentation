@@ -436,7 +436,7 @@ P(s) = \frac{K}{s(\tau s + 1)}
 
 \noindent Which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the pump motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
 
-\noindent Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in Figure \ref{eq:heat-system}.
+Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in Figure \ref{eq:heat-system}.
 
 \begin{equation}
 Qh = Qs + Ql
@@ -522,7 +522,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
+It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
 
 \begin{figure}[H]
 \begin{center}
@@ -532,7 +532,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
+We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
 
 \begin{figure}[H]
 \begin{center}
@@ -542,7 +542,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent For the \gls{pid} system, the ``critical k-value'', defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
+For the \gls{pid} system, the ``critical k-value'', defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
 
 \begin{figure}[H]
 \begin{center}
@@ -552,7 +552,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-\noindent As such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
+As such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
 
 \subsubsection{Power Electronics Design}
 The purpose behind the design of the power electronic circuitry is to be able to effectively implement the control strategies required to meet our design criteria. With the chosen control systems discussed in the previous section, the basic design of the power electronic circuits is straightforward. Depending on the size and power requirements of the servomotors needed to actuate the mechanical chutes and valves of the system, one of two circuits can be implemented. For large servos, the circuit pictured in Figure \ref{fig:servo-large-actuator-circuit} can be implemented to power the motor.
@@ -565,7 +565,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the microcontroller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
+However, for smaller servos that require less current to function, the relay and external DC source can be removed from the circuit completely, and the motor can be powered directly from the microcontroller's 5V output pins, as depicted in Figure \ref{fig:servo-small-actuator-circuit}.
 
 \begin{figure}[H]
 \begin{center}
@@ -575,7 +575,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent The heating element alluded to in the previous section is realised through the use of immersion hot water tank heaters. The original design called for a length of insulated resistive wire wrapped around the vessel, but that became too difficult to source parts for and implement. Additionally, the original design for the cooling system revolved around a compressor-driven refrigeration cycle with coolant coils wrapped around the vessel walls, but once again the sourcing of a refrigeration system proved too difficult to implement. Instead, the cooling is realised by an array of 20 solid-state Peltier cooling tiles scattered evenly around the vessel walls. Heat from the hot side of the tiles will be sunk away via aluminum blocks with water channels, where water passes through them to an outer reservoir with a larger forced-air heat sink. The Peltier tiles are powered through a purchased 12V, 1500W supply with a relay on the 120V input such that the control circuitry becomes identical to the heater.
+The heating element alluded to in the previous section is realised through the use of immersion hot water tank heaters. The original design called for a length of insulated resistive wire wrapped around the vessel, but that became too difficult to source parts for and implement. Additionally, the original design for the cooling system revolved around a compressor-driven refrigeration cycle with coolant coils wrapped around the vessel walls, but once again the sourcing of a refrigeration system proved too difficult to implement. Instead, the cooling is realised by an array of 20 solid-state Peltier cooling tiles scattered evenly around the vessel walls. Heat from the hot side of the tiles will be sunk away via aluminum blocks with water channels, where water passes through them to an outer reservoir with a larger forced-air heat sink. The Peltier tiles are powered through a purchased 12V, 1500W supply with a relay on the 120V input such that the control circuitry becomes identical to the heater.
 
 \noindent Figure \ref{fig:heater-hysteresis-circuit} and Figure \ref{fig:heater-pid-circuit} illustrate the circuits for the hysteresis control and the unselected \gls{pid} control schemes respectively. The Hysteresis control is realised with a simple circuit consisting of a relay between the 120V power supplied by the house and the immersion heating element. The \gls{pid} controller could have been realised with a triac whose firing angle is varied to modulate the power output to the heating coil.
 
@@ -595,7 +595,7 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent The pumping system is driven by a DC motor, and the circuit used to power it is pictured in Figure \ref{fig:motor-thyristor-dc-circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
+The pumping system is driven by a DC motor, and the circuit used to power it is pictured in Figure \ref{fig:motor-thyristor-dc-circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
 
 \noindent The original design called for an additional large DC motor to power a mechanical mixer that would be submersed in the vessel, however it was decided that the turbulence generated from boiling would suffice to aid in the extraction of sugars from the grain.
 
@@ -856,7 +856,7 @@ public class GCMNotificationResource {
 }
 \end{lstlisting}
 
-\noindent The above resource is called whenever the system needs to notify the client. The resource calls the function \textit{gcmSendMessage} which sends the message to the \gls{gcm} server. The \gls{gcm} server is an external service that is used to push notifications to client applications. A sample code of the \textit{gcmSendMessage} function is shown below where the message being sent to the client is put into a \gls{json} object to be passed to the \gls{gcm} server. 
+The above resource is called whenever the system needs to notify the client. The resource calls the function \textit{gcmSendMessage} which sends the message to the \gls{gcm} server. The \gls{gcm} server is an external service that is used to push notifications to client applications. A sample code of the \textit{gcmSendMessage} function is shown below where the message being sent to the client is put into a \gls{json} object to be passed to the \gls{gcm} server. 
 
 \begin{lstlisting}
 public static void gcmSendMessage(String message) {
@@ -885,7 +885,7 @@ public static void gcmSendMessage(String message) {
 \end{lstlisting}
 \cite{gcm-sendnotification} Code above is based on GCMSender.java provided by Google.
 
-\noindent This satisfies the functional requirement ``Application Notification'' seen in the \nameref{sec:functional} Section \ref{sec:functional}, where the system can provide notifications to the user simply by calling the \gls{url} with the message that it wants the user to receive.
+This satisfies the functional requirement ``Application Notification'' seen in the \nameref{sec:functional} Section \ref{sec:functional}, where the system can provide notifications to the user simply by calling the \gls{url} with the message that it wants the user to receive.
 
 \noindent The \textit{BrewLogResource}  is implemented to fulfil the ``Database'' requirement as seen in \nameref{sec:functional} Section \ref{sec:functional}. The resource provides a access point from the server to the database. A sample of the resource code is shown below:
  
@@ -918,14 +918,14 @@ public class BrewLogResource {
 }
 \end{lstlisting}
 
-\noindent This resource allows both reads and writes to the database. This gives the functionality of storing various data involved in brewing through write operations and querying the database through read operations. 
+This resource allows both reads and writes to the database. This gives the functionality of storing various data involved in brewing through write operations and querying the database through read operations. 
 
 \subsection{Mobile Application}\label{subsec:mobile-app}
 The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\noindent Platforms considered to develop the mobile application includes the Native Android platform, the \gls{ios} platform and the \gls{html5} web platform. Table \ref{tab:criterion-table} below shows the criterion used to choose the appropriate platform. \gls{gcm} support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the \gls{gcm} service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
+Platforms considered to develop the mobile application includes the Native Android platform, the \gls{ios} platform and the \gls{html5} web platform. Table \ref{tab:criterion-table} below shows the criterion used to choose the appropriate platform. \gls{gcm} support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the \gls{gcm} service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
 
 
 \begin{table}[H]
@@ -942,15 +942,15 @@ Weight:   & 40\%        & 25\%           & 10\%          & 15\%  \\
 \end{table}
 
 
-Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
+Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application. \\
 
-\noindent \gls{gcm} Support: Both Android and iOS platforms have \gls{gcm} client \glspl{api} developed by Google, and there are detailed steps in how to create a \gls{gcm} client \cite{gcm}. HTML5 based apps do not have GCM client \glspl{api}, but there are 3rd party support available for development, giving the platform a score of 5.
+\noindent \gls{gcm} Support: Both Android and iOS platforms have \gls{gcm} client \glspl{api} developed by Google, and there are detailed steps in how to create a \gls{gcm} client \cite{gcm}. HTML5 based apps do not have GCM client \glspl{api}, but there are 3rd party support available for development, giving the platform a score of 5. \\
 
-\noindent Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various \gls{sdk}s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
+\noindent Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various \gls{sdk}s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given. \\
 
-\noindent Accessibility: The most accessible application to develop would be the \gls{html5} application. This is because all mobile devices can use \gls{html5} applications through a web browser. However, both Android and \gls{ios} have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run \gls{ios} \cite{market}. Therefore a score of 10 for \gls{html5}, a score of 8 for android and a score of 1.6 for \gls{ios} is given based on how many percentage of smartphone users can be reached.
+\noindent Accessibility: The most accessible application to develop would be the \gls{html5} application. This is because all mobile devices can use \gls{html5} applications through a web browser. However, both Android and \gls{ios} have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run \gls{ios} \cite{market}. Therefore a score of 10 for \gls{html5}, a score of 8 for android and a score of 1.6 for \gls{ios} is given based on how many percentage of smartphone users can be reached. \\
 
-\noindent Resources: Developing the application for Android can be done using the Android Studio \gls{ide} and can be done on various computers \cite{astudio}. There are no specific \glspl{ide} to develop for the \gls{html5} platform, but web applications can be developed using any text editor. However, developing \gls{ios} applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, \gls{ios} and \gls{html5} respectively.
+\noindent Resources: Developing the application for Android can be done using the Android Studio \gls{ide} and can be done on various computers \cite{astudio}. There are no specific \glspl{ide} to develop for the \gls{html5} platform, but web applications can be developed using any text editor. However, developing \gls{ios} applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, \gls{ios} and \gls{html5} respectively. \\
 
 \begin{table}[H]
 \centering
@@ -967,12 +967,12 @@ HTML Web App   & 5           & 4              & 10            & 6        & 4.9  
 \end{tabular}
 \end{table}
 
-\noindent The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the \gls{gcm} client side of the system to communicate with the \gls{gcm} Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
+The decision matrix shows that the best option to develop the mobile application is through the Android platform. The application implements the \gls{gcm} client side of the system to communicate with the \gls{gcm} Application Server running on the embedded system. The following subsections will focus on the component design for the Android application.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsubsection{Real Time Data}
-This component of the application provides data from the brew system to the user's device. There are main two methods that the application provides data to the user. The first method is to display the current state of the brew in system through push notifications. Whenever a change is detected in the vessel such as temperature change, process change or any other state changes there might be, there would be a notification on the client's device to let the user know. The second method of the component is to provide interface that provides data statistics based on sensor data recorded by previous brews. This section will focus on the design for both methods. Figure \ref{fig:gcm-push-notification} demonstrates the design flow for the push notification service.
+This component of the application provides data from the brew system to the user's device. There are main two methods that the application provides data to the user. The first method is to display the current state of the brew in system through push notifications. Whenever a change is detected in the vessel such as temperature change, process change or any other state changes there might be, there would be a notification on the client's device to let the user know. The second method of the component is to provide interface that provides data statistics based on sensor data recorded by previous brews. This section will focus on the design for both methods. Figure \ref{fig:gcm-push-notification} demonstrates the design flow for the push notification service. \\
 
 \begin{figure}[H]
 \begin{center}
@@ -982,17 +982,17 @@ This component of the application provides data from the brew system to the user
 \end{center}
 \end{figure}
 
-\noindent MainActivity: This activity starts on application launch (when user taps on the app icon). The activity will start the PushNotificationListenerService to run in the background.
+\noindent MainActivity: This activity starts on application launch (when user taps on the app icon). The activity will start the PushNotificationListenerService to run in the background. \\
 
-\noindent PushNotificationListenerService: The Listener uses the GCMReceiver class to listen for and to receive the data messages from the server. Whenever a \gls{json} message arrives to the client side, the onMessageReceived function is called to parse the \gls{json} message.
+\noindent PushNotificationListenerService: The Listener uses the GCMReceiver class to listen for and to receive the data messages from the server. Whenever a \gls{json} message arrives to the client side, the onMessageReceived function is called to parse the \gls{json} message. \\
 
-\noindent onMessageReceived: This function parses the \gls{json} message received by the Listener and creates a type of BrewNotification to display to the user.
+\noindent onMessageReceived: This function parses the \gls{json} message received by the Listener and creates a type of BrewNotification to display to the user. \\
 
-\noindent BrewNotification: This object will encapsulate notification created for the end user. Types of BrewNotification are based on priority: max, medium and low. Max priority notification is given to messages that relay critical information about the brew system (overheat, pressure build up, etc). Medium priority notifications are created for important messages (brew changing state, brew completed). Low priority notifications are given to messages that contain messages which the user does not necessarily have to know (boil temperature reached).
+\noindent BrewNotification: This object will encapsulate notification created for the end user. Types of BrewNotification are based on priority: max, medium and low. Max priority notification is given to messages that relay critical information about the brew system (overheat, pressure build up, etc). Medium priority notifications are created for important messages (brew changing state, brew completed). Low priority notifications are given to messages that contain messages which the user does not necessarily have to know (boil temperature reached). \\
 
-\noindent To summarize, once the server sends a message to the client application,  the Listener service will process the message through the onMessageReceived function. Once the function parses which type of message it is, it displays the appropriate BrewNotification to the user.
+To summarize, once the server sends a message to the client application,  the Listener service will process the message through the onMessageReceived function. Once the function parses which type of message it is, it displays the appropriate BrewNotification to the user.
 
-\noindent The next part of the component displays previous data statistics recorded by the sensors on previous brews. The data displayed includes temperature readings, volume, sugar concentration and other sensor measurement. This gives the user the ability to look at past brews and possibly make adjustments. Figure \ref{fig:data-statistics} illustrates the application flow for the data statistics.
+The next part of the component displays previous data statistics recorded by the sensors on previous brews. The data displayed includes temperature readings, volume, sugar concentration and other sensor measurement. This gives the user the ability to look at past brews and possibly make adjustments. Figure \ref{fig:data-statistics} illustrates the application flow for the data statistics. \\
 
 \begin{figure}[H]
 \begin{center}
@@ -1002,17 +1002,17 @@ This component of the application provides data from the brew system to the user
 \end{center}
 \end{figure}
 
-\noindent MainActivity: The main activity (same from the previous component) allows the user to launch the activity to select previous brews.
+\noindent MainActivity: The main activity (same from the previous component) allows the user to launch the activity to select previous brews. \\
 
-\noindent SelectorActivity: This activity contains a selectable list of all previously done brews. By selecting one item launches the DataViewActivity based on the brew.
+\noindent SelectorActivity: This activity contains a selectable list of all previously done brews. By selecting one item launches the DataViewActivity based on the brew. \\
 
 \noindent DataViewActivity: Displays various data (temperature, pressure, yield percentage) of the brew selected by the user.
-Providing this information allows the user to view and experiment with previous brews to enhance the quality of future brews. 
+Providing this information allows the user to view and experiment with previous brews to enhance the quality of future brews. \\
 
-\noindent In conclusion, the real time data component of the application is designed to keep the user notified about the brew system, whether that would be about the current state of the brew process or about previous brew data. This enhances user experience such that the user does not have to constantly check the brew process to receive information since the system informs the user.
+In conclusion, the real time data component of the application is designed to keep the user notified about the brew system, whether that would be about the current state of the brew process or about previous brew data. This enhances user experience such that the user does not have to constantly check the brew process to receive information since the system informs the user.
 
 \subsubsection{Input Controls and Interaction}
-The second component of the application is to allow the user to control the brew system with the mobile application. The goals of this component is to allow the user to start the brew process through the application and to provide control over various conditions within the brew process such as the maximum temperature, the target sugar concentration and others that would affect the brew's quality. Figure \ref{fig:input-activity} below shows the design flow for this component.
+The second component of the application is to allow the user to control the brew system with the mobile application. The goals of this component is to allow the user to start the brew process through the application and to provide control over various conditions within the brew process such as the maximum temperature, the target sugar concentration and others that would affect the brew's quality. Figure \ref{fig:input-activity} below shows the design flow for this component. \\
 
 \begin{figure}[H]
 \begin{center}
@@ -1022,13 +1022,13 @@ The second component of the application is to allow the user to control the brew
 \end{center}
 \end{figure}
 
-\noindent MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls'' option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. 
+\noindent MainActivity: Option to select the input control activity, the main activity first checks if the mobile device is on the same local network as the vessel. If the device is not on the same network, the MainActivity will not allow the user to select the ``Input Controls'' option. This is because the mobile application is designed to allow users to perform write applications only when connected on the same network as the web server, otherwise the application allows read-only operations. Although this will limit the application's usability, it ensures a high level of security on the brew system, where it does not allow others to exploit the application over the internet to cause the main vessel to malfunction. \\
 
-\noindent InputActivity: The InputActivity allows the user to select a previous brew process to modify or create a brand new brew process. The user can change various states such as max temperature for boils, number of hours and other conditions that might affect the brew. The user is also able to start the brew from the interface, by tapping the START button snapped to the bottom of the interface.
+\noindent InputActivity: The InputActivity allows the user to select a previous brew process to modify or create a brand new brew process. The user can change various states such as max temperature for boils, number of hours and other conditions that might affect the brew. The user is also able to start the brew from the interface, by tapping the START button snapped to the bottom of the interface. \\
 
-\noindent SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity.
+\noindent SelectorActivity: If the user selects a previous brew, the activity retrieves the relevant data from the server, and populate the interface of the InputActivity. \\
 
-\noindent If the user taps the START button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
+If the user taps the ``Start'' button in the InputActivity interface, the application creates a \gls{json} file with all the data mapped to a key value. The client will send the \gls{json} file to the server and wait for a response. An error response from the server will have another key explaining the details of the error. The errors are based on lack of ingredients in the vessel or a malfunction detected by the system. A success response from the server means that the system started the brew.
 
 \section{Discussion and Conclusions}
 \subsection{Evaluation of Final Design}
@@ -1060,7 +1060,7 @@ Table \ref{tab:workload-percentage} below shows the amount of work contributed b
 Kevin Nause (Embedded Systems)		&        25\%               \\
 Mathieu Tremblay (Electrical)		&        25\%               \\
 Scott Wood (Mechanical)				&        25\%               \\
-Steve Jung (Mobile Application)		& 		 25\%				  \\
+Steve Jung (Mobile Application)		& 		 25\%				\\
 \bottomrule
 \end{tabular}
 \end{table}
