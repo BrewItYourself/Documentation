@@ -79,6 +79,7 @@
 \newacronym{html5}{HTML5}{HyperText Markup Language 5}
 \newacronym{lamp}{LAMP}{Lamp Apache MySQL PHP}
 \newacronym{lts}{LTS}{Long Term Support}
+\newacronym{nema}{NEMA}{National Electrical Manufacturers Association}
 \newacronym{pid}{PID}{Proportional-Integral-Derivative}
 \newacronym{ram}{RAM}{Random Access Memory}
 \newacronym{rest}{REST}{RESTful}
@@ -140,7 +141,7 @@ The art of home brewing has been steadily gaining popularity over the past 35 ye
 to combine home brewing experience with engineering design, and construct a single vessel brewing system. By maintaining a strict control of key parameters, the brewing process is regulated using a combination of fluid mechanics, heat transfer, digital controls, power systems, embedded robotics and mobile development. The \gls{ros}, allows for a design where sensors can be added to a modular setup and provide feedback. By receiving feedback from temperature readings, density measurements and capacitance monitoring, the brewing process can be accurately recorded, shared, and automated by the system. The single vessel design allows for reduced complexity compared to the traditional home brewing method which requires various components, constant monitoring and heavy maintenance.
 
 \section*{Acknowledgements}
-The Brew It Yourself team would like to acknowledge a number of people for providing guidance along the way. Project consultant Douglas Harder, for helping during the brainstorming phase and with interim financial backing; Steve Innocente of Innocente Brewing Company, for providing technical assistance with key problems during the design phase; Andrew Svoboda, for assisting with pre-build trials of the all-grain brewing process; and Rick Forgett and the rest of the Engineering Machine Shop staff, for assisting with the fabrication of our vessel and providing feedback on design decision
+The Brew It Yourself team would like to acknowledge a number of people for providing guidance along the way. Project consultant Douglas Harder, for helping during the brainstorming phase and with interim financial backing; Steve Innocente of Innocente Brewing Company, for providing technical assistance with key problems during the design phase; Andrew Svoboda, for assisting with pre-build trials of the all-grain brewing process; and Rick Forgett and the rest of the Engineering Machine Shop staff, for assisting with the fabrication of the vessel and providing feedback on design decision
 
 \pagebreak
 
@@ -156,7 +157,7 @@ The Brew It Yourself team would like to acknowledge a number of people for provi
 \setcounter{section}{0}
 \section{High-Level Description of Project}
 \subsection{Motivation}
-The art of home brewing has been steadily gaining popularity over the past 35 years alongside the rise of craft breweries in North America, so much so that in 2010 there were over 2000 craft breweries in the United States, after starting with only 8 in 1980 \cite{craft-beer}. The traditional method for homebrewing requires various components, constant monitoring and heavy maintenance. There should be a solution which reduces complexity, making it much more affordable and practical for home use. We hope to create a single vessel system that would make the home brewing process precise, automated and compact, all at a reasonable price.
+The art of home brewing has been steadily gaining popularity over the past 35 years alongside the rise of craft breweries in North America, so much so that in 2010 there were over 2000 craft breweries in the United States, after starting with only 8 in 1980 \cite{craft-beer}. The traditional method for homebrewing requires various components, constant monitoring and heavy maintenance. There should be a solution which reduces complexity, making it much more affordable and practical for home use. The hope is to create a single vessel system that would make the home brewing process precise, automated and compact, all at a reasonable price.
 \subsection{Project Objective}
 The objective of this project is to combine homebrewing experience with engineering design, and construct a single vessel brewing system. By maintaining a strict control of key parameters, the brewing process is regulated using a combination of fluid mechanics, heat transfer, digital controls, power systems, embedded robotics and mobile development. \gls{ros}, allows for a design where sensors can be added to a modular setup and provide feedback. By receiving feedback from temperature readings, density measurements and pH monitoring, the brewing process can be accurately recorded, shared, and automated by the system. 
 \subsection{Block Diagram}\label{sec:block-diagram}
@@ -194,10 +195,10 @@ D: The software running on the microcontroller is being designed. This software 
 \\ND: The heating coils and refrigeration unit used to regulate temperature of the vessel are not being designed. Instead, off-the-shelf or salvaged and adapted components from existing appliances (e.g. hot water tank coils, home air conditioning heat pump) are being used and the power electronic circuitry is being designed to power these devices.
 
 \item\textbf{Motor Controller}
-\\ND: The motors, pumps, and mixing mechanisms used in our system are not being designed. Instead, off-the-shelf or salvaged and adapted components from existing appliances (e.g. blender mixing prop, aquarium pumps) are being used and the power electronic circuitry is being designed to power these devices.
+\\ND: The motors, pumps, and mixing mechanisms used in the system are not being designed. Instead, off-the-shelf or salvaged and adapted components from existing appliances (e.g. blender mixing prop, aquarium pumps) are being used and the power electronic circuitry is being designed to power these devices.
 
 \item\textbf{Timing Actuators}
-\\ND: The actuators used in our system are not being designed. Instead, off-the-shelf solenoids and servo motors are being used and the mechanical subsystems that they will actuate are being designed. The power electronic circuitry is also being deigned to be able to power the actuators.
+\\ND: The actuators used in the system are not being designed. Instead, off-the-shelf solenoids and servo motors are being used and the mechanical subsystems that they will actuate are being designed. The power electronic circuitry is also being deigned to be able to power the actuators.
 
 \item\textbf{Embedded Computer System}
 \\ND: The hardware and operating system of the embedded computer system is not a design objective as it is outside the scope of this project. Instead an off-the-shelf embedded computer is purchased and a Debian based Linux operating system is installed to satisfy the requirements for the development environment.
@@ -434,7 +435,7 @@ P(s) = \frac{K}{s(\tau s + 1)}
 \label{eq:gear-angle}
 \end{equation}
 
-\noindent Which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that we don't require any sort of motor position tracking, nor do we require precise speed control, the control system for the pump motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
+\noindent Which is open-loop unstable when tracking a step input. However, when tracking a ramp (i.e. a constant velocity) the system is stable, though with large steady-state error. This makes intuitive sense because when a constant voltage is applied to a DC motor, the speed of the motor stabilizes to a constant value but the position of the motor goes unstable and increases indefinitely. Because of the fact that the system does not require any sort of motor position tracking, nor does it require precise speed control, the control system for the pump motor is an open-loop system without any feedback. Instead, the gear ratio of the gearbox that is powered by this motor is constructed to allow us crude speed control by simply changing the voltage output to the motor.
 
 Since the temperature model of the main volume of water is the same regardless of increasing or decreasing temperature, with only a sign-change to account for, the cooling system is assumed to function identically to the heating system in terms of power delivered to or taken from the water. Figure \ref{fig:heat-system-diagram} shows a sketch of the physical system, and the equation that relates heat input to heat storage and heat loss is described in Figure \ref{eq:heat-system}.
 
@@ -451,12 +452,12 @@ Qh = Qs + Ql
 \end{center}
 \end{figure}
 
-\noindent If we differentiate with respect to time, we get Equation \ref{eq:dt} \cite{heat-modelling}.
+\noindent If differentiated with respect to time, the result is Equation \ref{eq:dt} \cite{heat-modelling}.
 \begin{equation}
 P = C \times \frac{dT}{dt} + k(T - T_{a})
 \label{eq:dt}
 \end{equation}
-\noindent Where $P$ is the power input into the system, $C$ is the thermal capacity of the water, $k$ is the thermal conductance of the tank, $T_{a}$ is the ambient temperature of the room, $T$ is the temperature of the water, and t is time. Taking the Laplace transform of both side, we get Equation \ref{eq:laplace-heat}.
+\noindent Where $P$ is the power input into the system, $C$ is the thermal capacity of the water, $k$ is the thermal conductance of the tank, $T_{a}$ is the ambient temperature of the room, $T$ is the temperature of the water, and t is time. Taking the Laplace transform of both side, results in Equation \ref{eq:laplace-heat}.
 
 \begin{equation}
 P(s) = C \times s \times T(s) + kT(s)
@@ -470,15 +471,15 @@ P(s) = C \times s \times T(s) + kT(s)
 \label{eq:result-heat}
 \end{equation}
 
-\noindent Our transfer function model of the heating of a volume of liquid. Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water. Since our system is designed to hold 50L of water, we get the result shown in \ref{eq:value-heat}
+\noindent The transfer function model of the heating of a volume of liquid. Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water. Since the system is designed to hold 50L of water, the result shown in \ref{eq:value-heat} is achieved.
 
 \begin{equation}
 C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
 \label{eq:value-heat}
 \end{equation}
 
-\noindent Since the inner tank of our conical vessel is well insulated, we know that the value of $k$ (in units of Watts per Kelvin) is small. However, calculating $k$ mathematically is difficult and it is easier to instead perform some system identification on the completed system.
-The controller used to control the temperature of the volume of water can be implemented in many different ways, however we are deciding to look at 2 main options: a \gls{pid} controller, and a hysteresis-thermostat controller. Pictured below in Figure \ref{fig:hysteresis-block-diagram} and Figure \ref{fig:pid-block-diagram} are Simulink models created in MATLAB to simulate these two possible controller schemes. Additionally, the tuned \gls{pid} parameters used in the latter diagram, as calculated using the built-in Simulink \gls{pid} Tuner tool-kit, are listed in Figure \ref{fig:pid-parameters}.
+\noindent Since the inner tank of the conical vessel is well insulated, it is known that the value of $k$ (in units of Watts per Kelvin) is small. However, calculating $k$ mathematically is difficult and it is easier to instead perform some system identification on the completed system.
+The controller used to control the temperature of the volume of water can be implemented in many different ways, however it is reduced to two main options: a \gls{pid} controller, and a hysteresis-thermostat controller. Pictured below in Figure \ref{fig:hysteresis-block-diagram} and Figure \ref{fig:pid-block-diagram} are Simulink models created in MATLAB to simulate these two possible controller schemes. Additionally, the tuned \gls{pid} parameters used in the latter diagram, as calculated using the built-in Simulink \gls{pid} Tuner tool-kit, are listed in Figure \ref{fig:pid-parameters}.
 
 \begin{figure}[H]
 \begin{center}
@@ -504,7 +505,7 @@ The controller used to control the temperature of the volume of water can be imp
 \end{center}
 \end{figure}
 
-In these models, the step input has an amplitude of 88 degrees Celsius, simulating the heating of water from 10$^{\circ}$C to 98$^{\circ}$C; and the maximum allowable control signal is 1500W, which equates to 12.5A on standard 120V household power. We are looking to optimise a number of parameters with the selection of one of these control systems. Specifically, we want the best combination of settling time and steady-state error versus cost and complexity of implementation. Pictured below in Figure \ref{fig:hysteresis-step-lossless} and Figure \ref{fig:pid-step-lossless} are the step responses of each of these systems, simulated assuming a k-value of zero (well insulated, lossless vessel).
+In these models, the step input has an amplitude of 88 degrees Celsius, simulating the heating of water from 10$^{\circ}$C to 98$^{\circ}$C; and the maximum allowable control signal is 1500W, which equates to 12.5A on standard 120V household power. The end goal is to optimise a number of parameters with the selection of one of these control systems. Specifically, the target is the best combination of settling time and steady-state error versus cost and complexity of implementation. Pictured below in Figure \ref{fig:hysteresis-step-lossless} and Figure \ref{fig:pid-step-lossless} are the step responses of each of these systems, simulated assuming a k-value of zero (well insulated, lossless vessel).
 
 \begin{figure}[H]
 \begin{center}
@@ -522,7 +523,7 @@ In these models, the step input has an amplitude of 88 degrees Celsius, simulati
 \end{center}
 \end{figure}
 
-It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If we increase the thermal conduction value to a modest level (k = 10), we get the response plotted in Figure \ref{fig:hysteresis-step-lossy}. In this figure, we can clearly see that the switching period is around 20-minutes, which is long enough to ensure that we aren't over-switching our relays to run this controller. The new settling time is close to five hours in this plot.
+It can be seen from these plots that the hysteresis controller reaches the full-value thirty minutes earlier than the saturated \gls{pid} controller. Since this model is perfect and lossless, the operation of the hysteresis loop isn't very apparent. If the thermal conduction value is increased to a modest level (k = 10), the response plotted in Figure \ref{fig:hysteresis-step-lossy} is obtained. In this figure, it can be clearly observed that the switching period is around 20-minutes, which is long enough to ensure that it isn't over-switching the relays to run this controller. The new settling time is close to five hours in this plot.
 
 \begin{figure}[H]
 \begin{center}
@@ -532,7 +533,7 @@ It can be seen from these plots that the hysteresis controller reaches the full-
 \end{center}
 \end{figure}
 
-We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, we see that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
+By comparing this to Figure \ref{fig:pid-steps-various-k} which plots the response of the \gls{pid} system with varying k-values. In this plot, it is observed that for many values of k, the response time is also close to 5 hours, but as $k$ increases the steady-state error quickly worsens to an unacceptable level.
 
 \begin{figure}[H]
 \begin{center}
@@ -542,7 +543,7 @@ We can compare this to Figure \ref{fig:pid-steps-various-k} which plots the resp
 \end{center}
 \end{figure}
 
-For the \gls{pid} system, the ``critical k-value'', defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If we compare this to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, we can see that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
+For the \gls{pid} system, the ``critical k-value'', defined as the k-value for which the steady-state error is beyond an acceptable level, is below $k$ = 4. If this is compared to Figure \ref{fig:hysteresis-step-critical} where the critical k-value of 16.67 for the hysteresis controller is plotted, it can be determined that the hysteresis controller is much more robust when faced with uncertain values of $k$ since the critical value is over four times larger.
 
 \begin{figure}[H]
 \begin{center}
@@ -555,7 +556,7 @@ For the \gls{pid} system, the ``critical k-value'', defined as the k-value for w
 As such, the hysteresis-loop thermostat controller is being chosen to implement the heating and cooling of the vessel. Additional to the superior performance, the hysteresis controller has the added benefit of reduced implementation complexity in terms of the required power electronic circuitry, as discussed in the next section.
 
 \subsubsection{Power Electronics Design}
-The purpose behind the design of the power electronic circuitry is to be able to effectively implement the control strategies required to meet our design criteria. With the chosen control systems discussed in the previous section, the basic design of the power electronic circuits is straightforward. Depending on the size and power requirements of the servomotors needed to actuate the mechanical chutes and valves of the system, one of two circuits can be implemented. For large servos, the circuit pictured in Figure \ref{fig:servo-large-actuator-circuit} can be implemented to power the motor.
+The purpose behind the design of the power electronic circuitry is to be able to effectively implement the control strategies required to meet the design criteria. With the chosen control systems discussed in the previous section, the basic design of the power electronic circuits is straightforward. Depending on the size and power requirements of the servomotors needed to actuate the mechanical chutes and valves of the system, one of two circuits can be implemented. For large servos, the circuit pictured in Figure \ref{fig:servo-large-actuator-circuit} can be implemented to power the motor.
 
 \begin{figure}[H]
 \begin{center}
@@ -608,7 +609,7 @@ The pumping system is driven by a DC motor, and the circuit used to power it is 
 \end{figure}
 
 \subsubsection{Prototype Circuitry}
-Since we only recently received our vessel back from the machine shop from welding, none of the test electronics have been installed. However, Figure \ref{fig:electrical-prototype} shows a test board where the relays have been tested by powering loads, controlled by the microcontroller on the far right. The next step is to install these components and their duplicates into a NEMA-rated electrical box, affix the actuatable components to the vessel, and run the wiring between everything.
+Since the physical conical was only recently received from the machine shop due to welding requirements, a test board as shown in Figure \ref{fig:electrical-prototype} is necessary to simulate the process.  By powering loads, using a solid state relay paired with a microcontroller, a proper testing environment is achieved. The final step in the electrical design process is to install these components and their duplicates into a \gls{nema}-rated electrical box, attach the motor controlled valves and sensors to the vessel, as well as connecting them with their respective wiring schematics.
 
 \begin{figure}[H]
 \begin{center}
@@ -1040,7 +1041,7 @@ Overall, each essential Functional Specification and Non-Functional Specificatio
 \subsection{Use of Advanced Knowledge}
 The subsystem designs all require upper year knowledge to complete. For developing the communications portion of the embedded computer system SELinux policies enforcing read only access is a crucial security precaution.  Proper security enforcement can minimize the potential for malicious attacks on the system as outlined in ECE 458, Computer Security.  Developing the Web Server and the Mobile Application includes knowledge from such courses as ECE 356 (Database Systems), ECE 454 (Distributed Systems) and ECE 452 (Software Design and Architectures). Designing databases requires knowledge of various schemas, relations, normalization and indexing that are involved in the ECE 356 contents. Designing a mobile application involves the knowledge of software design processes, methods and implementing those designs that is taught in ECE 452. Finally, the brew system requires various sensor networks and communication between a centralized server to multiple clients which involves knowledge from ECE 454. The design and analysis of the control systems used in the electrical subsystems require knowledge of control systems that are taught in both ECE 380 (Analog Control Systems) and ECE 481 (Digital Control Systems), and the design and analysis of the power electronic components uses concepts taken directly from ECE 463 (Design \& Applications of Power Electronic Converters).
 \subsection{Creativity, Novelty, Elegance}
-The novelty of our design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
+The novelty of the design is that it involves so many components from various Engineering backgrounds to complete. The system allows the user to have precise controls of the brew but at the same time offer flexibility in various environmental conditions during the process. One of the most elegant part of the project is that it takes the entire brew process and compacts it into one single vessel. The use of a double walled tank enables the heating and cooling apparatus to be mounted inside the device itself, adding to the singular design aspect of the fermenter.
 
 \subsection{Quality of Risk Assessment}
 The power electronic systems pose many hazards to the building of this system. The custom 120V circuitry is inherently dangerous to test, and proper precautions must be taken to avoid electrocution. The heating components of the system are capable of getting very hot, so proper care must be taken to avoid burns and potentially starting a fire. The motors can be very dangerous if anyone puts their hand near the spinning parts while the system is live, so it is important to make sure that everything is powered down and disconnected before attempting to adjust any of the motor actuated assemblies.
