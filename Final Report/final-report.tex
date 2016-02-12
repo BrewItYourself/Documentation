@@ -5,7 +5,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{titling}
-\usepackage[toc,page]{appendix}
+\usepackage[titletoc,title]{appendix}
 \usepackage{setspace}
 \usepackage{tikz}
 \usepackage{graphicx} % Include graphic importing
@@ -68,6 +68,7 @@
 \newacronym{cfia}{CFIA}{Canadian Food Inspection Agency (CFIA)}
 \newacronym{gcm}{GCM}{Google Cloud Messaging}
 \newacronym{i2c}{I2C}{Inter-Integrated Circuit}
+\newacronym{ide}{IDE}{Integrated Development Environment}
 \newacronym{ios}{iOS}{iPhone Operating System}
 \newacronym{json}{JSON}{JavaScript Object Notation}
 \newacronym{html5}{HTML5}{HyperText Markup Language 5}
@@ -379,7 +380,7 @@ $w$ is the applied force on the collar\\
 \begin{equation}
 t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma^{2}b^{2} - 4(m + 1)a^{2}b^{2}\ln(\frac{a}{b}) \Big)
 \end{equation}
-The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125 in. was selected to meet the requirements for the outer tank.
+The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125in. was selected to meet the requirements for the outer tank.
 
 \subsubsection{Prototype Data}
 Section to add prototype data to mechanical section
@@ -828,13 +829,13 @@ The mobile application subsystem provides an interface to the user and consists 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%GET RID OF THIS PART%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\noindent{The} mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
-Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table [criterion table] below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
+\noindent The mobile application subsystem provides an interface to the user and consists of three main components. The first is a service that provides real time data of the current brew to the user, the second component is an interface that provides data analytics recorded by the sensor, as well as providing an interface that allows the user to input controls. The following section describes how the appropriate platform for the application was chosen, as well as describing the three components.
+Platforms considered to develop the mobile application includes the Native Android platform, the Native Apple iOS platform and the HTML5 web platform. Table \ref{tab:criterion-table} below shows the criterion used to choose the appropriate platform. GCM support ranks the platforms based on the amount of support available for client development. This is the most important criteria since the Web Server mainly communicates with the clients using the GCM service, making it essential that the client is able to process the message. The implementation criteria ranks the platforms based on the amount of time required to develop, members previous knowledge about developing for the platform and amount of developer support that is available. This criteria is important because there is a limited amount of time for development, and the application must be done on time. Accessibility ranks the platforms based on how many smartphones can use the mobile application. The more smartphones that the platform can support, the higher its rank. The last criteria, ranks the platforms on the equipment and software tools required to develop the application on the platform. The platforms will be ranked based on the amount of costs to develop the application.
 
 \begin{table}[H]
 \centering
 \caption{Criterion Table}
-\label{fig:criterion-table}
+\label{tab:criterion-table}
 \begin{tabular}{lllll}
 Criteria: & GCM Support & Implementation & Accessibility & Resource \\
 Weight:   & 40\%        & 25\%           & 10\%          & 15\%    
@@ -845,8 +846,8 @@ Weight:   & 40\%        & 25\%           & 10\%          & 15\%
 Each development platform is compared based on previous knowledge. A score from 1 to 10 is given to each criteria for the 3 platforms. A weighted sum is calculated to determine the appropriate platform to develop the application.
 GCM Support: Both Android and iOS platforms have GCM client Application Program Interface (API)s developed by Google, and there are detailed steps in how to create a GCM client \cite{gcm}. HTML5 based apps do not have GCM client APIs, but there are 3rd party support available for development, giving the platform a score of 5.
 Implementation: The members have the most experience with Android platform, and have little to no experience with the others. Also, both Google and Apple have released various Software Development Kit (SDK)s and documentation for developing Android and iOS applications respectively. The members do not have any experience in developing for HTML5 web applications, nor is there are any SDKs or documentation. However, all 3 platforms have various support online, from forums, blogs and repositories all having sample code and logic that can be very helpful in development. Considering this, a final score of 8 for Android, a score of 6 for iOS and a score of 4 for HTML5 is given.
-Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7% of smartphones run the Android OS while 15.7% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
-Resources: Developing the application for Android can be done using the Android Studio (Integrated Development Environment) IDE and can be done on various computers \cite{astudio}. There are no specific IDEs to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
+Accessibility: The most accessible application to develop would be the HTLM5 application. This is because all mobile devices can use HTML5 applications through a web browser. However, both Android and iOS have their own application distribution (Google PlayStore and Apple app store). 2014 market share of mobile devices shows that 80.7\% of smartphones run the Android OS while 15.7\% of smartphones run iOS \cite{market}. Therefore a score of 10 for HTML5, a score of 8 for android and a score of 1.6 for iOS is given based on how many percentage of smartphone users can be reached.
+Resources: Developing the application for Android can be done using the Android Studio \gls{ide} and can be done on various computers \cite{astudio}. There are no specific \glspl{ide} to develop for the HTML5 platform, but web applications can be developed using any text editor. However, developing iOS applications involve getting additional resources since they can only be developed on Apple computers.  Therefore a score of 8, 6 and 4 is given to Android, iOS and HTML5 respectively.
 
 \begin{table}[H]
 \centering
@@ -941,14 +942,14 @@ The group focus for the past 2 months was on the initial phase of the project. T
 
 \pagebreak
 
-\appendix
+\begin{appendices}
 %Appendix A
-\includepdf[scale=0.9,pages=1,pagecommand=\section{Appendix}]{forms/symposium_prototype_hazard_disclosure_form.pdf}
+\includepdf[scale=0.9,pages=1,pagecommand=\section{Prototype Hazard Disclosure}]{forms/symposium_prototype_hazard_disclosure_form.pdf}
 
 %Appendix B
-\includepdf[scale=0.9,pages=1,pagecommand=\section{Appendix}]{forms/symposium_floor_plan_request_form.pdf}
+\includepdf[scale=0.9,pages=1,pagecommand=\section{Symposium Floor Plan Request}]{forms/symposium_floor_plan_request_form.pdf}
 
-\section{Appendix}\label{app:304}
+\section{Mechanical Materials}\label{app:304}
 This section contains important lookup values for mechanical and materials calculations.
 \begin{table}[H]
 \caption{Alloying elements of \gls{aisi} 304 Stainless Steel \cite{machinery-handbook}}
@@ -996,6 +997,8 @@ This section contains important lookup values for mechanical and materials calcu
 \label{tab:}
 \end{table}
 
+\pagebreak
+\section{Parts List}\label{app:parts-list}
 
-
+\end{appendices}
 \end{document}
