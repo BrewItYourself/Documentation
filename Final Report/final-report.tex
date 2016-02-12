@@ -59,7 +59,8 @@
 \newglossaryentry{intergrancor}{type=technical, name=Inter-granular Corrosion, description=Corrosion caused by varying composition between the grains and grain boundaries within a metal.  Welding 304 stainless steel may lead to intergranular corrosion if not cooled properly.}
 \newglossaryentry{ultenstr}{type=technical, name=Ultimate Tensile Strength, description=The maximum tensile stress a material can experience before breaking or fracturing}
 \newglossaryentry{yieldstr}{type=technical, name=Yield Stress, description=The stress at which a material begins to plastically deform.}
-\newglossaryentry{jersey}{type=technical, name=Jersey Framework, description=An \gls{rest} API Framework written in the Java coding language.}
+\newglossaryentry{jersey}{type=technical, name=Jersey Framework, description=A \gls{rest} API Framework written in the Java coding language.}
+\newglossaryentry{resource}{type=technical, name=Jersey Resource, description=An object with a type\, associated data\, or a set of methods that operate on it.}
 
 
 %\newacronym{abv}{ABV}{Alcohol By Volume}
@@ -538,9 +539,9 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent{The} heating element alluded to in the previous section is realised through the use of immersion hot water tank heaters. The original design called for a length of insulated resistive wire wrapped around the vessel, but that became too difficult to source parts for and implement. Additionally, the original design for the cooling system revolved around a compressor-driven refrigeration cycle with coolant coils wrapped around the vessel walls, but once again the sourcing of a refrigeration system proved too difficult to implement. Instead, the cooling is realised by an array of 20 solid-state Peltier cooling tiles scattered evenly around the vessel walls. Heat from the hot side of the tiles will be sunk away via aluminum blocks with water channels, where water passes through them to an outer reservoir with a larger forced-air heat sink. The Peltier tiles are powered through a purchased 12V, 1500W supply with a relay on the 120V input such that the control circuitry becomes identical to the heater.
+\noindent The heating element alluded to in the previous section is realised through the use of immersion hot water tank heaters. The original design called for a length of insulated resistive wire wrapped around the vessel, but that became too difficult to source parts for and implement. Additionally, the original design for the cooling system revolved around a compressor-driven refrigeration cycle with coolant coils wrapped around the vessel walls, but once again the sourcing of a refrigeration system proved too difficult to implement. Instead, the cooling is realised by an array of 20 solid-state Peltier cooling tiles scattered evenly around the vessel walls. Heat from the hot side of the tiles will be sunk away via aluminum blocks with water channels, where water passes through them to an outer reservoir with a larger forced-air heat sink. The Peltier tiles are powered through a purchased 12V, 1500W supply with a relay on the 120V input such that the control circuitry becomes identical to the heater.
 
-\noindent{Figure} \ref{fig:heater-hysteresis-circuit} and Figure \ref{fig:heater-pid-circuit} illustrate the circuits for the hysteresis control and the unselected \gls{pid} control schemes respectively. The Hysteresis control is realised with a simple circuit consisting of a relay between the 120V power supplied by the house and the immersion heating element. The \gls{pid} controller could have been realised with a triac whose firing angle is varied to modulate the power output to the heating coil.
+\noindent Figure \ref{fig:heater-hysteresis-circuit} and Figure \ref{fig:heater-pid-circuit} illustrate the circuits for the hysteresis control and the unselected \gls{pid} control schemes respectively. The Hysteresis control is realised with a simple circuit consisting of a relay between the 120V power supplied by the house and the immersion heating element. The \gls{pid} controller could have been realised with a triac whose firing angle is varied to modulate the power output to the heating coil.
 
 \begin{figure}[H]
 \begin{center}
@@ -558,9 +559,9 @@ The purpose behind the design of the power electronic circuitry is to be able to
 \end{center}
 \end{figure}
 
-\noindent{The} pumping system is driven by a DC motor, and the circuit used to power it is pictured in figure \ref{fig:Motor-Thyristor-DC-Circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
+\noindent The pumping system is driven by a DC motor, and the circuit used to power it is pictured in figure \ref{fig:Motor-Thyristor-DC-Circuit}. It consists of a step-down transformer to reduce the mains voltage down to 12 volts to power the motors, then a full-bridge thyristor rectifier is used to simultaneously rectify the AC input voltage to a DC voltage and control the magnitude of the output voltage by varying the thyristor firing angle α. The DC motor can be modeled as an inductance in series with a resistance, followed by a reverse-emf voltage.
 
-\noindent{The} original design called for an additional large DC motor to power a mechanical mixer that would be submersed in the vessel, however it was decided that the turbulence generated from boiling would suffice to aid in the extraction of sugars from the grain.
+\noindent The original design called for an additional large DC motor to power a mechanical mixer that would be submersed in the vessel, however it was decided that the turbulence generated from boiling would suffice to aid in the extraction of sugars from the grain.
 
 \begin{figure}[H]
 \begin{center}
@@ -729,7 +730,7 @@ For message passing, this application uses the data message type. This is becaus
 \cite{sparging}.
 
 \subsubsection{\gls{rest} Web Server}
-The \gls{rest} Web Server is implemented using the Jersey Framework 
+The \gls{rest} Web Server is implemented using the \gls{jersey}. Each functionality specified is mapped to a URL endpoint called a \gls{resource}. The Application Notification endpoint is mapped to a resource called  
 
 \begin{lstlisting}
 @Path("gcm_notification")
