@@ -168,16 +168,16 @@ Baumier, E3 Machine Shop, Fabrication;}
 \begin{column}{\twocolwid} % Begin a column which is two columns wide (column 2)
 
 \begin{block}{Mechanical System} 
-\end{block}
 
 \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column
 
-\begin{column}{\onecolwid}\vspace{-.6in} % The first column within column 2 (column 2.1)
+\begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
 
 %----------------------------------------------------------------------------------------
 %	MECHANICAL SYSTEM
 %----------------------------------------------------------------------------------------
-
+\vspace{-.3in}
+\begin{justify}
 The American Society of Mechanical Engineers (ASME) outlines a function for determining the wall thickness of a pressure vessel as:
 
 \begin{equation}
@@ -210,17 +210,17 @@ t^{2} = \frac{3w}{m\sigma(a^{2} - b^{2})}\Big(a^{4}(3m + 1) + b^{4}(m - 1) - 4ma
 \normalsize
 
 The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a sheet thickness of 0.125in. was selected.
-
+\end{justify}
 %----------------------------------------------------------------------------------------
 
 \end{column} % End of column 2.1
 
-\begin{column}{\onecolwid}\vspace{-.6in} % The second column within column 2 (column 2.2)
+\begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
 
 %----------------------------------------------------------------------------------------
 %	MECHANICAL CONTINUED
 %----------------------------------------------------------------------------------------
-
+\vspace{-.3in}
 \begin{figure}
 \includegraphics[width=0.56\linewidth]{full-vessel-render.png}
 \caption{A mechanical render of the full vessel}
@@ -231,6 +231,7 @@ The resultant thickness is 2.05mm, or 0.08in. Accounting for a safety factor, a 
 \end{column} % End of column 2.2
 
 \end{columns} % End of the split of column 2 - any content after this will now take up 2 columns width
+\end{block}
 
 %----------------------------------------------------------------------------------------
 %	BREWING THEORY
@@ -245,7 +246,6 @@ The brewing process consists of heating the grains in water to extract the sugar
 %----------------------------------------------------------------------------------------
 
 \begin{block}{Electrical System}
-\end{block}
 
 \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
 
@@ -253,6 +253,8 @@ The brewing process consists of heating the grains in water to extract the sugar
 %----------------------------------------------------------------------------------------
 %	ELECTRICAL SYSTEM
 %----------------------------------------------------------------------------------------
+\vspace{-.3in}
+\begin{justify}
 Since the temperature model of the main volume of water is the same regardless of  temperature change; the cooling system is identical to the heating system with respect to power.
 
 \begin{equation}
@@ -280,7 +282,7 @@ P(s) = C \times s \times T(s) + kT(s)
 \frac{T(s)}{P(s)} = \frac{1}{Cs + k}
 \label{eq:result-heat}
 \end{equation}
-
+\end{justify}
 %----------------------------------------------------------------------------------------
 
 \end{column} % End of column 2.1
@@ -289,7 +291,9 @@ P(s) = C \times s \times T(s) + kT(s)
 %----------------------------------------------------------------------------------------
 %	ELECTRICAL CONTINUED
 %----------------------------------------------------------------------------------------
-\noindent  Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water.
+\vspace{-0.3in}
+\begin{justify}
+Finding the value of the parameter C is relatively straightforward, it is equal to the mass of water in the system multiplied by the specific heat capacity of water.
 
 \begin{equation}
 C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
@@ -300,12 +304,15 @@ C = 50L \times 1\frac{kg}{L} \times 4200\frac{J}{kgK} = 210,000\frac{J}{K}
 \includegraphics[width=\linewidth]{hysteresis-step-lossy.png}
 \caption{Lossy hysteresis loop step response with control signal}
 \end{figure}
-
+\end{justify}
 %----------------------------------------------------------------------------------------
 
 \end{column} % End of column 2.2
 
 \end{columns} % End of the split of column 2
+
+\end{block}
+
 
 \end{column} % End of the second column
 
